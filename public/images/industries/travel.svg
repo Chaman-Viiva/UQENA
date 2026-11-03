@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none" role="img" aria-label="travel">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="500" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#12182B"/>
+    </linearGradient>
+    <linearGradient id="a" x1="100" y1="400" x2="700" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <radialGradient id="g" cx="70%" cy="30%" r="50%">
+      <stop stop-color="#06B6D4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <path d="M80 360c80-120 160-180 260-180s180 40 280 20 140-20 140-20" stroke="url(#a)" stroke-width="3" opacity="0.5"/>
+  <path d="M60 400c100-80 200-140 320-140s220 50 340 30" stroke="url(#a)" stroke-width="2" opacity="0.3"/>
+  <circle cx="560" cy="180" r="90" fill="url(#a)" opacity="0.18"/>
+  <circle cx="560" cy="180" r="54" stroke="url(#a)" stroke-width="2" opacity="0.7"/>
+  <rect x="140" y="140" width="220" height="140" rx="18" fill="#1A2238" stroke="url(#a)" stroke-width="1.5" opacity="0.95"/>
+  <rect x="160" y="168" width="120" height="10" rx="5" fill="url(#a)" opacity="0.9"/>
+  <rect x="160" y="192" width="180" height="8" rx="4" fill="#94A3B8" opacity="0.35"/>
+  <rect x="160" y="214" width="160" height="8" rx="4" fill="#94A3B8" opacity="0.25"/>
+  <rect x="160" y="236" width="90" height="22" rx="11" fill="url(#a)" opacity="0.85"/>
+  
+</svg>

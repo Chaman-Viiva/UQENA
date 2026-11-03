@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UQENA Website
 
-## Getting Started
+Premium frontend corporate website for **UQENA** — a global software engineering and digital technology company.
 
-First, run the development server:
+**Tagline:** Engineering What's Next.  
+**Intended domain:** [uqena.com](https://uqena.com)
+
+This project is **frontend-only** (Next.js App Router). There is no backend, database, authentication, or CMS.
+
+## Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Lucide icons
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start local development server |
+| `npm run build` | Create production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Customize
 
-To learn more about Next.js, take a look at the following resources:
+### Contact destination
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Update email and social placeholders in:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+src/lib/config.ts
+```
 
-## Deploy on Vercel
+The contact form validates on the client and opens a `mailto:` draft. It does **not** send data to a server.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Structured content lives in:
+
+```text
+src/data/services.ts
+src/data/industries.ts
+src/data/solutions.ts
+src/data/projects.ts
+src/data/insights.ts
+src/data/process.ts
+src/data/navigation.ts
+```
+
+### Brand assets
+
+Logo variations, favicon, and social image:
+
+```text
+public/brand/
+```
+
+Imagery:
+
+```text
+public/images/hero/
+public/images/services/
+public/images/industries/
+public/images/projects/
+public/images/insights/
+```
+
+### Site URL / SEO
+
+Set `siteConfig.url` in `src/lib/config.ts`. Sitemap and robots use that value (`src/app/sitemap.ts`, `src/app/robots.ts`).
+
+## Important notes
+
+- Portfolio items are **conceptual demonstration projects**, not verified client work.
+- Legal pages are **drafts** and must be reviewed before production use.
+- Contact phone and address fields are **placeholders** until verified company details are supplied.
+- Do not invent testimonials, awards, certifications, or metrics without real sources.
+
+## License
+
+Private — all rights reserved by UQENA unless otherwise stated.
