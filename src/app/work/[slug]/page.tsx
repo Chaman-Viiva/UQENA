@@ -8,12 +8,33 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { SiteShell } from "@/components/layout/SiteShell";
+import {
+  CareFlowMock,
+  GenericProjectMock,
+  HavenlyMock,
+  LedgerlyMock,
+} from "@/components/work/ProjectMockups";
 import { getProject, projects } from "@/data/projects";
 import { siteConfig } from "@/lib/config";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function ProjectVisual({
+  slug,
+  title,
+  accent,
+}: {
+  slug: string;
+  title: string;
+  accent: string;
+}) {
+  if (slug === "careflow-health") return <CareFlowMock />;
+  if (slug === "havenly-market") return <HavenlyMock />;
+  if (slug === "ledgerly") return <LedgerlyMock />;
+  return <GenericProjectMock name={title} accent={accent} />;
+}
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -41,72 +62,68 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   return (
     <SiteShell>
       <PageHero
-        compact
-        eyebrow={`Conceptual project · ${project.category}`}
+        eyebrow={`Conceptual · ${project.category}`}
         title={project.title}
         description={project.subtitle}
         primaryCta={{ label: "Start a conversation", href: "/contact" }}
         secondaryCta={{ label: "All work", href: "/work" }}
       >
-        <div className="card-uq overflow-hidden p-2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-navy-muted">
-            <Image
-              src={project.image}
-              alt={`Mockup illustration for ${project.title}`}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-            />
+        <div className="relative">
+          <div className="absolute inset-0 -z-10 opacity-40">
+            <div className="img-frame relative h-full min-h-[220px] overflow-hidden rounded-[var(--radius-md)]">
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 480px"
+                priority
+              />
+            </div>
           </div>
+          <ProjectVisual slug={project.slug} title={project.title} accent={project.accent} />
         </div>
       </PageHero>
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq">
-          <div
-            className="inline-flex rounded-full border border-blue/40 bg-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue"
-            role="status"
-          >
+      <section className="section-pad section-cream border-b border-[var(--line)]">
+        <div className="container-uq max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
             Conceptual demonstration — not client work
-          </div>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-gray">{project.summary}</p>
+          </p>
+          <p className="mt-6 text-lg leading-relaxed text-slate md:text-xl">{project.summary}</p>
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
-        <div className="container-uq">
+      <section className="section-pad section-paper">
+        <div className="container-uq max-w-3xl">
           <SectionHeading
-            light
             eyebrow="Objective"
             title="What this concept explores"
             description="The learning goal behind this sample — not a measured business outcome."
           />
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-slate-700 md:text-lg">
-            {project.objective}
-          </p>
+          <p className="mt-8 text-base leading-relaxed text-slate md:text-lg">{project.objective}</p>
         </div>
       </section>
 
-      <section className="section-pad">
+      <section className="section-pad section-cream">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Features"
             title="Illustrative capabilities"
             description="Representative product ideas shown in this concept — not a shipped feature list for a live product."
           />
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
+          <ul className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {project.features.map((feature) => (
-              <li key={feature} className="card-uq flex gap-4 p-5 md:p-6">
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue" aria-hidden />
-                <p className="text-sm leading-relaxed text-gray md:text-base">{feature}</p>
+              <li key={feature} className="flex gap-4 py-5 md:py-6">
+                <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden />
+                <p className="text-sm leading-relaxed text-slate md:text-base">{feature}</p>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-paper border-y border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Stack"
@@ -117,7 +134,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {project.technologies.map((tech) => (
               <li
                 key={tech}
-                className="rounded-full border border-[var(--border)] bg-navy-elevated px-4 py-2 text-sm text-gray"
+                className="rounded-[var(--radius)] border border-[var(--line)] bg-cream px-4 py-2 text-sm text-slate"
               >
                 {tech}
               </li>
@@ -126,12 +143,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="section-pad">
+      <section className="section-pad section-cream">
         <div className="container-uq">
-          <Link
-            href="/work"
-            className="focus-ring inline-flex items-center gap-2 text-sm font-medium text-gray transition hover:text-white"
-          >
+          <Link href="/work" className="link-arrow inline-flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Back to portfolio
           </Link>
@@ -139,7 +153,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <Button href="/contact" size="lg">
               Discuss a real product
             </Button>
-            <Button href="/services" variant="secondary" size="lg">
+            <Button href="/services" variant="ghost" size="lg">
               View services
             </Button>
           </div>

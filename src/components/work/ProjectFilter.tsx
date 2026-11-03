@@ -5,6 +5,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { projectCategories, projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import {
+  CareFlowMock,
+  HavenlyMock,
+  LedgerlyMock,
+  GenericProjectMock,
+} from "@/components/work/ProjectMockups";
+
+function ProjectVisual({ slug, title, accent }: { slug: string; title: string; accent: string }) {
+  if (slug === "careflow-health") return <CareFlowMock />;
+  if (slug === "havenly-market") return <HavenlyMock />;
+  if (slug === "ledgerly") return <LedgerlyMock />;
+  return <GenericProjectMock name={title} accent={accent} />;
+}
 
 export function ProjectFilter() {
   const [active, setActive] = useState<(typeof projectCategories)[number]>("All");
@@ -24,10 +37,10 @@ export function ProjectFilter() {
             role="tab"
             aria-selected={active === cat}
             className={cn(
-              "focus-ring rounded-full border px-4 py-2 text-sm transition",
+              "focus-ring rounded-[var(--radius)] border px-4 py-2 text-sm transition",
               active === cat
-                ? "border-transparent bg-gradient-uq text-white"
-                : "border-[var(--border)] text-gray hover:text-white",
+                ? "border-ink bg-ink text-white"
+                : "border-[var(--line)] text-slate hover:border-ink/30 hover:text-ink",
             )}
             onClick={() => setActive(cat)}
           >
@@ -36,28 +49,40 @@ export function ProjectFilter() {
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {filtered.map((project) => (
+      <div className="mt-12 space-y-16">
+        {filtered.map((project, index) => (
           <Link
             key={project.slug}
             href={`/work/${project.slug}`}
-            className="card-uq focus-ring group overflow-hidden"
+            className={cn(
+              "group grid gap-8 lg:grid-cols-2 lg:items-center",
+              index % 2 === 1 && "lg:[&>*:first-child]:order-2",
+            )}
           >
-            <div className="relative aspect-[16/10] bg-navy-muted">
-              <Image
-                src={project.image}
-                alt=""
-                fill
-                className="object-cover transition duration-500 group-hover:scale-105"
-                sizes="(max-width:768px) 100vw, 33vw"
-              />
+            <div className="relative">
+              <div className="absolute inset-0 -z-10 opacity-40">
+                <div className="img-frame relative h-full min-h-[200px] overflow-hidden rounded-[var(--radius-md)]">
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
+                  />
+                </div>
+              </div>
+              <ProjectVisual slug={project.slug} title={project.title} accent={project.accent} />
             </div>
-            <div className="p-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-blue">
-                Conceptual project · {project.category}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
+                Conceptual · {project.category}
               </p>
-              <h3 className="mt-2 text-xl font-semibold text-white">{project.title}</h3>
-              <p className="mt-2 text-sm text-gray">{project.summary}</p>
+              <h3 className="mt-3 font-display text-3xl font-medium text-ink group-hover:text-blue">
+                {project.title}
+              </h3>
+              <p className="mt-2 text-sm text-slate">{project.subtitle}</p>
+              <p className="mt-4 text-slate">{project.summary}</p>
+              <span className="link-arrow mt-6">View project →</span>
             </div>
           </Link>
         ))}

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -57,30 +56,18 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   return (
     <SiteShell>
       <PageHero
-        compact
         eyebrow={article.category}
         title={article.title}
         description={article.excerpt}
         primaryCta={{ label: "All insights", href: "/insights" }}
         secondaryCta={{ label: "Contact", href: "/contact" }}
-      >
-        <div className="card-uq overflow-hidden p-2">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-navy-muted">
-            <Image
-              src={article.cover}
-              alt=""
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-            />
-          </div>
-        </div>
-      </PageHero>
+        image={article.cover}
+        imageAlt=""
+      />
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-cream border-b border-[var(--line)]">
         <div className="container-uq">
-          <p className="text-sm text-gray">
+          <p className="text-sm text-slate">
             {article.author} · {article.readingTime} min read · Published{" "}
             {formatDate(article.publishedAt)}
           </p>
@@ -89,10 +76,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
               <p key={paragraph.slice(0, 48)}>{paragraph}</p>
             ))}
           </div>
-          <Link
-            href="/insights"
-            className="focus-ring mt-10 inline-flex items-center gap-2 text-sm font-medium text-gray transition hover:text-white"
-          >
+          <Link href="/insights" className="link-arrow mt-10 inline-flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Back to insights
           </Link>
@@ -100,29 +84,31 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       </section>
 
       {fallbackRelated.length > 0 && (
-        <section className="section-pad bg-surface">
+        <section className="section-pad section-paper">
           <div className="container-uq">
             <SectionHeading
-              light
               eyebrow="Continue reading"
               title="Related articles"
               description={`More from ${siteConfig.name} on similar themes.`}
             />
-            <ul className="mt-10 grid gap-5 md:grid-cols-3">
+            <ul className="mt-10 grid gap-6 md:grid-cols-3">
               {fallbackRelated.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={`/insights/${item.slug}`}
-                    className="block rounded-[var(--radius-lg)] border border-slate-200 bg-white p-6 transition hover:border-blue/40"
+                    className="group block h-full border border-[var(--line)] bg-cream p-6 transition hover:border-ink/20"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-wider text-blue">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
                       {item.category}
                     </p>
-                    <h3 className="mt-2 font-semibold text-navy">{item.title}</h3>
-                    <p className="mt-2 text-sm text-slate-600">{item.excerpt}</p>
-                    <p className="mt-3 text-xs text-slate-500">
-                      {item.readingTime} min read
-                    </p>
+                    <h3 className="mt-2 font-display text-lg font-medium text-ink group-hover:text-blue">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate">{item.excerpt}</p>
+                    <p className="mt-3 text-xs text-slate">{item.readingTime} min read</p>
+                    <span className="link-arrow mt-4">
+                      Read <ArrowUpRight className="h-4 w-4" />
+                    </span>
                   </Link>
                 </li>
               ))}

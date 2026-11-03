@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { Mail } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -53,10 +53,10 @@ export default function ContactPage() {
         secondaryCta={{ label: "View services", href: "/services" }}
       />
 
-      <section className="section-pad">
+      <section className="section-pad section-cream">
         <div className="container-uq">
-          <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-start">
-            <div className="card-uq p-8 md:p-10">
+          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+            <div className="border border-[var(--line)] bg-paper p-8 md:p-10">
               <SectionHeading
                 eyebrow="Inquiry"
                 title="Project inquiry form"
@@ -67,43 +67,30 @@ export default function ContactPage() {
             </div>
 
             <aside className="space-y-8">
-              <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-navy-elevated p-6 md:p-8">
-                <h2 className="text-lg font-semibold text-white">Direct contact</h2>
-                <ul className="mt-5 space-y-4 text-sm text-gray">
-                  <li className="flex gap-3">
-                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
-                    <span>
-                      <a
-                        href={siteConfig.contact.mailto}
-                        className="font-medium text-white hover:text-blue"
-                      >
-                        {siteConfig.contact.email}
-                      </a>
-                    </span>
-                  </li>
-                  <li className="flex gap-3">
-                    <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
-                    <span>
-                      <span className="block font-medium text-white">
-                        {siteConfig.contact.locationLabel}
-                      </span>
-                      <span className="mt-1 block text-gray">{siteConfig.contact.locationNote}</span>
-                      <span className="mt-2 block text-gray">
-                        Phone: {siteConfig.contact.phone}
-                      </span>
-                    </span>
-                  </li>
-                </ul>
+              <div className="border border-[var(--line)] bg-white p-6 md:p-8">
+                <p className="eyebrow mb-4">Direct</p>
+                <h2 className="font-display text-2xl font-medium text-ink">Email us</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate">
+                  Prefer to write directly? Use the address below — the same team reads every
+                  message.
+                </p>
+                <a
+                  href={siteConfig.contact.mailto}
+                  className="focus-ring mt-6 inline-flex items-center gap-3 text-base font-medium text-ink transition hover:text-blue"
+                >
+                  <Mail className="h-5 w-5 shrink-0 text-blue" aria-hidden />
+                  {siteConfig.contact.email}
+                </a>
               </div>
 
               <div
-                className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-navy-elevated p-6 md:p-8"
+                className="border border-[var(--line)] bg-paper p-6 md:p-8"
                 role="note"
               >
-                <h2 className="text-lg font-semibold text-white">Privacy note</h2>
-                <p className="mt-3 text-sm leading-relaxed text-gray">
+                <h2 className="font-display text-lg font-medium text-ink">Privacy note</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate">
                   Information you include in the mailto message is handled according to our{" "}
-                  <Link href="/privacy-policy" className="text-blue hover:underline">
+                  <Link href="/privacy-policy" className="font-medium text-blue hover:underline">
                     Privacy Policy
                   </Link>
                   . Because this site does not transmit form data to a server, you control what
@@ -116,7 +103,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-paper border-y border-[var(--line)]">
         <div className="container-uq">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <SectionHeading

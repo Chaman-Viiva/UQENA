@@ -1,16 +1,6 @@
 import type { Metadata } from "next";
-import {
-  Building2,
-  ChartColumn,
-  Layers,
-  LayoutDashboard,
-  PanelLeft,
-  Smartphone,
-  Sparkles,
-  Store,
-  Workflow,
-  type LucideIcon,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -25,45 +15,33 @@ export const metadata: Metadata = {
     "Software solution types from UQENA — enterprise platforms, SaaS products, automation, customer portals, internal systems, AI applications, dashboards, marketplaces, and mobile-first platforms.",
 };
 
-const icons: Record<string, LucideIcon> = {
-  "building-2": Building2,
-  layers: Layers,
-  workflow: Workflow,
-  "layout-dashboard": LayoutDashboard,
-  "panel-left": PanelLeft,
-  sparkles: Sparkles,
-  "chart-column": ChartColumn,
-  store: Store,
-  smartphone: Smartphone,
-};
-
 export default function SolutionsPage() {
   return (
     <SiteShell>
       <PageHero
+        tone="paper"
         eyebrow="What we build"
         title="Solutions shaped for real operating contexts"
         description={`${siteConfig.name} engineers digital products across the patterns below — each engagement is scoped to your domain, constraints, and roadmap rather than a one-size template.`}
         primaryCta={{ label: "Discuss your product", href: "/contact" }}
         secondaryCta={{ label: "Our services", href: "/services" }}
+        image="/images/hero/structure.jpg"
+        imageAlt="Architectural structure detail"
       />
 
-      <section className="section-pad border-b border-[var(--border)]">
+      <section className="section-pad section-cream border-b border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Overview"
             title="Nine solution types we deliver"
-            description="Explore what each pattern covers, who it serves, the problems it addresses, and how we typically approach delivery."
+            description="Product patterns — not SKU packages. Jump to a section or read straight through."
           />
-          <nav
-            className="mt-10 flex flex-wrap gap-2"
-            aria-label="Jump to solution"
-          >
+          <nav className="mt-8 flex flex-wrap gap-x-6 gap-y-2" aria-label="Jump to solution">
             {solutions.map((solution) => (
               <a
                 key={solution.slug}
                 href={`#${solution.slug}`}
-                className="rounded-full border border-[var(--border)] bg-navy-elevated px-4 py-2 text-sm text-gray transition hover:border-blue/40 hover:text-white"
+                className="link-arrow text-sm"
               >
                 {solution.title}
               </a>
@@ -73,105 +51,58 @@ export default function SolutionsPage() {
       </section>
 
       {solutions.map((solution, index) => {
-        const Icon = icons[solution.icon] ?? Layers;
-        const isLight = index % 2 === 1;
+        const isPaper = index % 2 === 0;
 
         return (
           <section
             key={solution.slug}
             id={solution.slug}
-            className={`section-pad scroll-mt-24 ${isLight ? "bg-surface" : ""}`}
+            className={`section-pad scroll-mt-24 ${
+              isPaper ? "section-paper border-b border-[var(--line)]" : "section-cream"
+            }`}
           >
             <div className="container-uq">
-              <article className="grid gap-10 lg:grid-cols-[auto_1fr] lg:items-start">
-                <div
-                  className={`inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg ${
-                    isLight
-                      ? "bg-gradient-uq text-white shadow-blue/20"
-                      : "bg-navy-muted text-blue"
-                  }`}
-                >
-                  <Icon className="h-7 w-7" aria-hidden />
-                </div>
-                <div>
-                  <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>
-                  <h2
-                    className={`mt-2 text-3xl font-bold tracking-tight md:text-4xl ${
-                      isLight ? "text-navy" : "text-white"
-                    }`}
-                  >
+              <article className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+                <header className="lg:col-span-4">
+                  <p className="font-display text-sm text-blue">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
                     {solution.title}
                   </h2>
-                  <p
-                    className={`mt-4 max-w-3xl text-lg leading-relaxed ${
-                      isLight ? "text-slate-600" : "text-gray"
-                    }`}
-                  >
-                    {solution.summary}
-                  </p>
+                  <p className="mt-4 text-lg leading-relaxed text-slate">{solution.summary}</p>
+                </header>
 
-                  <div className="mt-10 grid gap-8 lg:grid-cols-2">
-                    <div
-                      className={
-                        isLight
-                          ? "rounded-[var(--radius-lg)] border border-slate-200 bg-white p-6 md:p-7"
-                          : "card-uq p-6 md:p-7"
-                      }
-                    >
-                      <h3
-                        className={`text-sm font-semibold uppercase tracking-wide ${
-                          isLight ? "text-blue" : "text-blue"
-                        }`}
-                      >
+                <div className="lg:col-span-8">
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
                         Who it helps
                       </h3>
-                      <p
-                        className={`mt-3 text-sm leading-relaxed md:text-base ${
-                          isLight ? "text-slate-700" : "text-gray"
-                        }`}
-                      >
+                      <p className="mt-3 text-sm leading-relaxed text-slate md:text-base">
                         {solution.helps}
                       </p>
                     </div>
-                    <div
-                      className={
-                        isLight
-                          ? "rounded-[var(--radius-lg)] border border-slate-200 bg-white p-6 md:p-7"
-                          : "card-uq p-6 md:p-7"
-                      }
-                    >
-                      <h3 className="text-sm font-semibold uppercase tracking-wide text-blue">
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
                         Our approach
                       </h3>
-                      <p
-                        className={`mt-3 text-sm leading-relaxed md:text-base ${
-                          isLight ? "text-slate-700" : "text-gray"
-                        }`}
-                      >
+                      <p className="mt-3 text-sm leading-relaxed text-slate md:text-base">
                         {solution.approach}
                       </p>
                     </div>
                   </div>
 
-                  <div className="mt-8">
-                    <h3
-                      className={`text-base font-semibold ${
-                        isLight ? "text-navy" : "text-white"
-                      }`}
-                    >
+                  <div className="mt-10">
+                    <h3 className="font-display text-base font-medium text-ink">
                       Problems we address
                     </h3>
-                    <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                    <ul className="mt-4 divide-y divide-[var(--line)] border-y border-[var(--line)]">
                       {solution.problems.map((problem) => (
                         <li
                           key={problem}
-                          className={`flex gap-3 rounded-xl px-4 py-3 text-sm md:text-base ${
-                            isLight
-                              ? "border border-slate-200 bg-slate-50 text-slate-700"
-                              : "border border-[var(--border)] bg-navy-muted text-gray"
-                          }`}
+                          className="py-4 text-sm leading-relaxed text-slate md:text-base"
                         >
-                          <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue" aria-hidden />
                           {problem}
                         </li>
                       ))}
@@ -184,24 +115,38 @@ export default function SolutionsPage() {
         );
       })}
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq prose-uq max-w-3xl">
+      <section className="section-pad section-dark">
+        <div className="container-uq grid gap-10 lg:grid-cols-2 lg:items-end">
           <SectionHeading
+            tone="dark"
             eyebrow="Fit"
             title="Solutions meet services and industries"
             description="These patterns describe the kinds of products we build. Delivery is shaped through our service lines, process, and domain experience."
           />
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href="/services" variant="secondary">
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <Button href="/services" variant="inverse" size="md">
               View services
             </Button>
-            <Button href="/industries" variant="secondary">
+            <Button href="/industries" variant="outline-light" size="md">
               Industries we serve
             </Button>
-            <Button href="/process" variant="secondary">
+            <Button href="/process" variant="outline-light" size="md">
               How we work
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section className="section-pad section-paper">
+        <div className="container-uq max-w-3xl">
+          <p className="text-sm leading-relaxed text-slate">
+            Not sure which pattern fits? Most roadmaps blend several — a portal on top of an
+            internal platform, automation feeding a dashboard, mobile as the primary surface.
+            Share your context and we will help frame scope and sequencing.
+          </p>
+          <Link href="/contact" className="link-arrow mt-6 inline-flex">
+            Start a conversation <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

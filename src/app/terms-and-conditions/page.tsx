@@ -15,27 +15,27 @@ export default function TermsPage() {
   return (
     <SiteShell>
       <PageHero
-        compact
+        tone="paper"
         eyebrow="Legal"
         title="Terms and Conditions"
         description="Draft website terms. Must be reviewed by qualified legal counsel before production use."
       />
 
-      <section className="section-pad">
-        <div className="container-uq">
+      <section className="section-pad section-cream">
+        <div className="container-uq max-w-3xl">
           <div
-            className="mb-10 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4"
+            className="mb-10 border border-amber-200 bg-amber-50/90 px-5 py-4 md:px-6 md:py-5"
             role="note"
           >
-            <p className="text-sm leading-relaxed text-white">
-              <span className="font-semibold text-amber-200">Legal review required.</span> This
-              document is a starting point only. Client services are governed by separate written
-              agreements, not these website terms alone.
+            <p className="text-sm leading-relaxed text-slate">
+              <span className="font-semibold text-ink">Legal review required.</span> This document
+              is a starting point only. Client services are governed by separate written agreements,
+              not these website terms alone.
             </p>
           </div>
 
-          <div className="prose-uq max-w-3xl">
-            <p className="text-sm text-gray">Last updated: {lastUpdated}</p>
+          <div className="prose-uq">
+            <p className="text-sm text-slate">Last updated: {lastUpdated}</p>
 
             <h2>1. Agreement</h2>
             <p>

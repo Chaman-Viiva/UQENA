@@ -6,7 +6,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-[var(--header-h)] [&:has(#site-hero)]:pt-0">
+        {children}
+      </main>
       <Footer />
       <BackToTop />
     </>

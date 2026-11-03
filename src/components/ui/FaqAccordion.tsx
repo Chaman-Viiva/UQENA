@@ -6,11 +6,25 @@ import { cn } from "@/lib/utils";
 
 type Item = { question: string; answer: string };
 
-export function FaqAccordion({ items }: { items: Item[] }) {
+export function FaqAccordion({
+  items,
+  tone = "light",
+}: {
+  items: Item[];
+  tone?: "light" | "dark";
+}) {
   const [open, setOpen] = useState<number | null>(0);
+  const dark = tone === "dark";
 
   return (
-    <div className="divide-y divide-[var(--border)] rounded-2xl border border-[var(--border)] bg-navy-elevated">
+    <div
+      className={cn(
+        "divide-y border",
+        dark
+          ? "divide-white/10 border-white/10 bg-navy-soft"
+          : "divide-[var(--line)] border-[var(--line)] bg-cream",
+      )}
+    >
       {items.map((item, index) => {
         const isOpen = open === index;
         const panelId = `faq-panel-${index}`;
@@ -21,7 +35,10 @@ export function FaqAccordion({ items }: { items: Item[] }) {
               <button
                 id={buttonId}
                 type="button"
-                className="focus-ring flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold text-white md:px-6"
+                className={cn(
+                  "focus-ring flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold md:px-6",
+                  dark ? "text-white" : "text-ink",
+                )}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpen(isOpen ? null : index)}
@@ -29,7 +46,8 @@ export function FaqAccordion({ items }: { items: Item[] }) {
                 {item.question}
                 <ChevronDown
                   className={cn(
-                    "h-5 w-5 shrink-0 text-gray transition",
+                    "h-5 w-5 shrink-0 transition",
+                    dark ? "text-gray" : "text-slate",
                     isOpen && "rotate-180 text-blue",
                   )}
                 />
@@ -40,7 +58,10 @@ export function FaqAccordion({ items }: { items: Item[] }) {
               role="region"
               aria-labelledby={buttonId}
               hidden={!isOpen}
-              className="px-5 pb-5 text-sm leading-relaxed text-gray md:px-6"
+              className={cn(
+                "px-5 pb-5 text-sm leading-relaxed md:px-6",
+                dark ? "text-gray" : "text-slate",
+              )}
             >
               {item.answer}
             </div>

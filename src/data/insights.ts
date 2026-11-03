@@ -31,7 +31,7 @@ export const articles: Article[] = [
     readingTime: 8,
     publishedAt: "2026-01-14",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/ai-product.svg",
+    cover: "/images/insights/ai-product.jpg",
     content: [
       "AI features succeed when they improve a specific decision, reduce a repetitive task, or unlock an experience that was previously impractical. They fail when they are added to signal modernity without a clear job to be done.",
       "Start with the workflow. Identify where people lose time, make error-prone judgments, or abandon tasks because the interface cannot help them. Those moments are candidates for assistance — not every screen needs a chatbot.",
@@ -50,7 +50,7 @@ export const articles: Article[] = [
     readingTime: 9,
     publishedAt: "2026-02-03",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/architecture.svg",
+    cover: "/images/insights/architecture.jpg",
     content: [
       "Early architecture is less about predicting the future and more about preserving the ability to change. The best systems make tomorrow’s decisions cheaper, not today’s diagrams prettier.",
       "Prefer clear module boundaries over premature microservices. Many teams split infrastructure before they understand their domain seams. Start with modular monoliths and extract when ownership, scale, or release cadence demand it.",
@@ -69,7 +69,7 @@ export const articles: Article[] = [
     readingTime: 7,
     publishedAt: "2026-02-20",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/web-performance.svg",
+    cover: "/images/insights/web-performance.jpg",
     content: [
       "Users do not separate “the product” from “how fast it felt.” Performance is not a technical footnote; it is part of the experience promise.",
       "Set budgets early. Decide what is acceptable for LCP, INP, and bundle weight before the interface accumulates convenience libraries and unoptimized media.",
@@ -88,7 +88,7 @@ export const articles: Article[] = [
     readingTime: 6,
     publishedAt: "2026-03-08",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/mobile-habits.svg",
+    cover: "/images/insights/mobile-habits.jpg",
     content: [
       "Retention begins with the first session. If onboarding asks for too much before value appears, many users never return to discover the rest.",
       "Respect platform conventions. Familiar navigation and system patterns reduce learning cost and make your product feel trustworthy.",
@@ -107,7 +107,7 @@ export const articles: Article[] = [
     readingTime: 8,
     publishedAt: "2026-03-22",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/design-systems.svg",
+    cover: "/images/insights/design-systems.jpg",
     content: [
       "A design system fails when it optimizes for completeness instead of adoption. Teams use what helps them ship tomorrow’s screen.",
       "Start with the highest-frequency patterns: buttons, forms, navigation, cards, and feedback states. Depth beats breadth early on.",
@@ -126,7 +126,7 @@ export const articles: Article[] = [
     readingTime: 7,
     publishedAt: "2026-04-05",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/automation.svg",
+    cover: "/images/insights/automation.jpg",
     content: [
       "Automation creates leverage only when it is observable. Silent failures are worse than manual work because they hide until customers notice.",
       "Map the process before you encode it. Many teams automate a broken workflow and simply accelerate the mess.",
@@ -145,7 +145,7 @@ export const articles: Article[] = [
     readingTime: 9,
     publishedAt: "2026-04-18",
     author: "UQENA Editorial Team",
-    cover: "/images/insights/strategy.svg",
+    cover: "/images/insights/strategy.jpg",
     content: [
       "Roadmaps collapse when urgency is mistaken for importance. Strategy is the discipline of sequencing work so each investment unlocks the next.",
       "Separate customer value, operational necessity, and platform enablement. Mixing them into one undifferentiated backlog hides trade-offs.",

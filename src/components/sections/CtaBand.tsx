@@ -8,28 +8,25 @@ type Props = {
 };
 
 export function CtaBand({
-  title = "Have an idea worth engineering?",
-  description = "Let's turn your next big idea into something real.",
-  ctaLabel = "Start a Conversation",
+  title = "Have something ambitious in mind?",
+  description = "Tell us about the product, platform, or engineering challenge you are working through. We will help you find a clear path forward.",
+  ctaLabel = "Start a Project",
   ctaHref = "/contact",
 }: Props) {
   return (
-    <section className="section-pad">
+    <section className="section-pad section-dark">
       <div className="container-uq">
-        <div className="relative overflow-hidden rounded-[28px] border border-[var(--border)] bg-navy-elevated px-8 py-14 md:px-14 md:py-16">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 left-10 h-64 w-64 rounded-full bg-violet/20 blur-3xl" />
-          <div className="relative max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+        <div className="grid gap-8 border border-white/10 bg-navy-soft p-8 md:grid-cols-[1.4fr_auto] md:items-end md:p-12 lg:p-14">
+          <div className="max-w-2xl">
+            <p className="eyebrow mb-4">Next step</p>
+            <h2 className="font-display text-3xl font-medium tracking-tight text-white md:text-4xl lg:text-5xl">
               {title}
             </h2>
             <p className="mt-4 text-lg text-gray">{description}</p>
-            <div className="mt-8">
-              <Button href={ctaHref} size="lg">
-                {ctaLabel}
-              </Button>
-            </div>
           </div>
+          <Button href={ctaHref} size="lg" variant="inverse">
+            {ctaLabel}
+          </Button>
         </div>
       </div>
     </section>

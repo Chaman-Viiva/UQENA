@@ -37,7 +37,7 @@ export const industries: Industry[] = [
       "Better visibility into operations",
       "Digital experiences patients can navigate confidently",
     ],
-    image: "/images/industries/healthcare.svg",
+    image: "/images/industries/healthcare.jpg",
   },
   {
     slug: "fintech",
@@ -65,7 +65,7 @@ export const industries: Industry[] = [
       "Architecture prepared for growth and auditability",
       "Faster iteration on customer-facing financial features",
     ],
-    image: "/images/industries/fintech.svg",
+    image: "/images/industries/fintech.jpg",
   },
   {
     slug: "education",
@@ -93,7 +93,7 @@ export const industries: Industry[] = [
       "Tools educators can actually run day to day",
       "Foundations for adaptive learning features",
     ],
-    image: "/images/industries/education.svg",
+    image: "/images/industries/education.jpg",
   },
   {
     slug: "real-estate",
@@ -121,7 +121,7 @@ export const industries: Industry[] = [
       "Stronger mobile engagement",
       "Operational visibility across properties and teams",
     ],
-    image: "/images/industries/real-estate.svg",
+    image: "/images/industries/real-estate.jpg",
   },
   {
     slug: "ecommerce",
@@ -149,7 +149,7 @@ export const industries: Industry[] = [
       "Clearer order lifecycle for teams and customers",
       "Room to test and improve conversion continuously",
     ],
-    image: "/images/industries/ecommerce.svg",
+    image: "/images/industries/ecommerce.jpg",
   },
   {
     slug: "travel",
@@ -177,7 +177,7 @@ export const industries: Industry[] = [
       "Stronger operational coordination",
       "Digital experiences that match hospitality standards",
     ],
-    image: "/images/industries/travel.svg",
+    image: "/images/industries/travel.jpg",
   },
   {
     slug: "logistics",
@@ -205,7 +205,7 @@ export const industries: Industry[] = [
       "Better utilization of operational capacity",
       "A unified view of movement and performance",
     ],
-    image: "/images/industries/logistics.svg",
+    image: "/images/industries/logistics.jpg",
   },
   {
     slug: "saas",
@@ -233,7 +233,7 @@ export const industries: Industry[] = [
       "Better activation and retention experiences",
       "Engineering capacity aligned to roadmap priorities",
     ],
-    image: "/images/industries/saas.svg",
+    image: "/images/industries/saas.jpg",
   },
   {
     slug: "professional-services",
@@ -261,7 +261,7 @@ export const industries: Industry[] = [
       "Reusable knowledge and templates",
       "Clearer commercial and delivery alignment",
     ],
-    image: "/images/industries/professional-services.svg",
+    image: "/images/industries/professional-services.jpg",
   },
 ];
 

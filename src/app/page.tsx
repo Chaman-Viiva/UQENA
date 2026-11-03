@@ -1,33 +1,38 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { HomeHero } from "@/components/sections/HomeHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { ServiceCard } from "@/components/cards/ServiceCard";
-import { IndustryCard } from "@/components/cards/IndustryCard";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { services, dedicatedTeamsService } from "@/data/services";
-import { industries } from "@/data/industries";
-import { projects } from "@/data/projects";
-import {
-  processSteps,
-  capabilities,
-  differentiators,
-  technologies,
-} from "@/data/process";
-import { siteConfig } from "@/lib/config";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import {
+  CareFlowMock,
+  HavenlyMock,
+  LedgerlyMock,
+} from "@/components/work/ProjectMockups";
+import { services } from "@/data/services";
+import { industries } from "@/data/industries";
+import { processSteps, differentiators, technologies } from "@/data/process";
+import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.tagline}`,
   description:
-    "UQENA is a software engineering partner for custom products, web and mobile apps, AI, cloud, and digital transformation — built with clarity, quality, and long-term partnership in mind.",
+    "UQENA designs and engineers digital products, platforms, and intelligent systems for ambitious businesses worldwide.",
 };
 
-const featuredProjects = projects.slice(0, 3);
+const featuredServices = [
+  services[0],
+  services[1],
+  services[2],
+  services[3],
+  services[4],
+  services[5],
+];
+
+const featuredIndustries = industries.slice(0, 6);
 
 export default function HomePage() {
   return (
@@ -35,270 +40,324 @@ export default function HomePage() {
       <OrganizationJsonLd />
       <HomeHero />
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
-            <SectionHeading
-              eyebrow="Technology partner"
-              title="Software engineering with product discipline"
-              description="UQENA helps organizations design, build, and evolve digital products that matter — combining strategy, design, and engineering in one accountable partnership."
+      {/* Editorial intro — asymmetric */}
+      <section className="section-pad section-cream">
+        <div className="container-uq grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-4">The studio</p>
+            <h2 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              A technology partner for work that has to ship — and stay coherent.
+            </h2>
+          </div>
+          <div className="prose-uq lg:col-span-6 lg:col-start-7">
+            <p>
+              UQENA helps organizations turn complex requirements into reliable
+              software: products customers trust, platforms teams can operate, and
+              systems that remain understandable as they grow.
+            </p>
+            <p>
+              We work as an extension of your product organization — combining
+              strategy, design, and engineering without the theatre of inflated
+              claims or template solutions.
+            </p>
+            <Link href="/about" className="link-arrow mt-2">
+              About UQENA <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Image break */}
+      <section className="bg-paper">
+        <div className="container-uq py-6 md:py-10">
+          <div className="img-frame relative aspect-[21/9] rounded-[var(--radius-md)] md:aspect-[24/9]">
+            <Image
+              src="/images/about/workspace.jpg"
+              alt="Bright modern workspace with long collaborative tables"
+              fill
+              className="object-cover"
+              sizes="100vw"
             />
-            <div className="prose-uq max-w-none rounded-[28px] border border-[var(--border)] bg-navy-elevated p-8 md:p-10">
-              <p>
-                Whether you are shaping a new platform, modernizing critical systems, or
-                embedding AI where it creates real leverage, we work as an extension of
-                your team — with transparent collaboration and architecture you can grow
-                into.
-              </p>
-              <p className="mb-0">
-                We focus on durable outcomes: clear interfaces, dependable services, and
-                delivery practices that keep momentum after launch.
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-pad bg-navy-elevated/40">
+      {/* Services — numbered editorial list, not identical cards */}
+      <section className="section-pad section-cream border-y border-[var(--line)]">
         <div className="container-uq">
-          <SectionHeading
-            eyebrow="Services"
-            title="End-to-end capabilities for ambitious products"
-            description="From custom platforms to dedicated teams, explore how UQENA can support your roadmap."
-            className="mb-12 md:mb-14"
-          />
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <li key={service.slug}>
-                <ServiceCard
-                  href={`/services/${service.slug}`}
-                  title={service.shortTitle}
-                  summary={service.summary}
-                  icon={service.icon}
-                />
-              </li>
-            ))}
-            <li>
-              <ServiceCard
-                href="/services"
-                title={dedicatedTeamsService.title}
-                summary={dedicatedTeamsService.summary}
-                icon="users"
-              />
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="section-pad">
-        <div className="container-uq">
-          <SectionHeading
-            eyebrow="What we deliver"
-            title="Featured capabilities"
-            description="Cross-functional depth across the product lifecycle — so you can move from idea to production with one partner."
-            className="mb-12 md:mb-14"
-          />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilities.map((cap) => (
-              <li key={cap.title} className="card-uq p-6">
-                <h3 className="text-base font-semibold text-white">{cap.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray">{cap.description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section-pad border-y border-[var(--border)] bg-navy-elevated/30">
-        <div className="container-uq">
-          <div className="card-uq relative overflow-hidden p-8 md:flex md:items-center md:justify-between md:gap-10 md:p-12">
-            <div className="pointer-events-none absolute -right-16 top-0 h-48 w-48 rounded-full bg-violet/20 blur-3xl" />
-            <div className="relative max-w-xl">
-              <p className="eyebrow mb-4">Solutions</p>
-              <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-                Outcome-oriented solutions for complex digital challenges
-              </h2>
-              <p className="mt-4 text-gray">
-                Explore how UQENA combines services into focused solution paths — from
-                greenfield products and platform modernization to AI-enabled workflows
-                and dedicated engineering teams.
-              </p>
-            </div>
-            <div className="relative mt-8 shrink-0 md:mt-0">
-              <Button href="/solutions" size="lg" className="gap-2">
-                View solutions
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Button>
-            </div>
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Capabilities"
+              title="Services built around real product work"
+              description="Focused engagements or end-to-end delivery — scoped to your roadmap, not a package menu."
+            />
+            <Link href="/services" className="link-arrow shrink-0">
+              All services <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
-      </section>
 
-      <section className="section-pad">
-        <div className="container-uq">
-          <SectionHeading
-            eyebrow="Industries"
-            title="Domain-aware engineering"
-            description="We adapt product and platform patterns to the realities of your sector — without one-size-fits-all templates."
-            className="mb-12 md:mb-14"
-          />
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((industry) => (
-              <li key={industry.slug}>
-                <IndustryCard
-                  href={`/industries/${industry.slug}`}
-                  title={industry.shortTitle}
-                  summary={industry.summary}
-                  image={industry.image}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section-pad bg-navy-elevated/40">
-        <div className="container-uq">
-          <SectionHeading
-            eyebrow="Process"
-            title="How we work"
-            description="A clear sequence from discovery through evolution — with your team involved at every meaningful decision."
-            className="mb-12 md:mb-14"
-          />
-          <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {processSteps.map((step) => (
-              <li key={step.number} className="card-uq flex flex-col p-6 md:p-7">
-                <span className="text-gradient text-sm font-bold tracking-widest">
-                  {step.number}
+          <div className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {featuredServices.map((service, index) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="group grid gap-4 py-7 transition md:grid-cols-[5rem_1fr_1.2fr_auto] md:items-baseline md:gap-8"
+              >
+                <span className="font-display text-sm text-blue">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-xl font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-gray">
+                <h3 className="font-display text-xl font-medium text-ink group-hover:text-blue md:text-2xl">
+                  {service.shortTitle}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate md:text-base">
+                  {service.summary}
+                </p>
+                <span className="text-sm font-semibold text-blue opacity-0 transition group-hover:opacity-100 md:justify-self-end">
+                  Explore →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions teaser — dark band with distinct layout */}
+      <section className="section-pad section-dark">
+        <div className="container-uq grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <SectionHeading
+              tone="dark"
+              eyebrow="Solutions"
+              title="Built around the problem, not a product catalog"
+              description="We shape platforms, portals, automation, and AI-enabled products around how your business actually operates."
+            />
+            <Link href="/solutions" className="link-arrow mt-8">
+              Explore solutions <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid gap-px bg-white/10 sm:grid-cols-2">
+            {[
+              "Enterprise platforms",
+              "SaaS products",
+              "Customer portals",
+              "AI-powered applications",
+              "Business automation",
+              "Data dashboards",
+            ].map((item) => (
+              <div
+                key={item}
+                className="bg-midnight px-5 py-6 text-sm font-medium text-white/90"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries — magazine grid */}
+      <section className="section-pad section-paper">
+        <div className="container-uq">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Industries"
+              title="Domain-aware product engineering"
+              description="We apply the same craft across sectors — with imagery, workflows, and constraints that match the field."
+            />
+            <Link href="/industries" className="link-arrow shrink-0">
+              All industries <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredIndustries.map((industry, i) => (
+              <Link
+                key={industry.slug}
+                href={`/industries/${industry.slug}`}
+                className={`group relative overflow-hidden rounded-[var(--radius-md)] ${
+                  i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2 min-h-[320px]" : "min-h-[220px]"
+                }`}
+              >
+                <Image
+                  src={industry.image.replace(".svg", ".jpg")}
+                  alt=""
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                  sizes="(max-width:768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                  <h3 className="font-display text-xl font-medium text-white md:text-2xl">
+                    {industry.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-white/75">
+                    {industry.summary}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured work — strong visual identity */}
+      <section className="section-pad section-cream">
+        <div className="container-uq">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Selected work"
+              title="Conceptual projects that show how we think"
+              description="Demonstration products — not client case studies. Each explores a different product language and engineering problem."
+            />
+            <Link href="/work" className="link-arrow shrink-0">
+              Full portfolio <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-14 space-y-16">
+            <article className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              <CareFlowMock />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
+                  Conceptual · Healthcare
+                </p>
+                <h3 className="mt-3 font-display text-3xl font-medium text-ink">
+                  CareFlow Health
+                </h3>
+                <p className="mt-4 text-slate">
+                  A calm clinic operations concept for appointments, care boards, and
+                  follow-ups — designed for clarity under daily pressure.
+                </p>
+                <Link href="/work/careflow-health" className="link-arrow mt-6">
+                  View project <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+
+            <article className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              <div className="order-2 lg:order-1">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet">
+                  Conceptual · Real estate
+                </p>
+                <h3 className="mt-3 font-display text-3xl font-medium text-ink">
+                  Havenly Market
+                </h3>
+                <p className="mt-4 text-slate">
+                  An editorial marketplace experience for discovering and comparing
+                  properties without drowning high-intent users in noise.
+                </p>
+                <Link href="/work/havenly-market" className="link-arrow mt-6">
+                  View project <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+              <div className="order-1 lg:order-2">
+                <HavenlyMock />
+              </div>
+            </article>
+
+            <article className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              <LedgerlyMock />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan">
+                  Conceptual · Fintech
+                </p>
+                <h3 className="mt-3 font-display text-3xl font-medium text-ink">
+                  Ledgerly
+                </h3>
+                <p className="mt-4 text-slate">
+                  A finance console concept focused on balance clarity, transaction
+                  readability, and controlled payment actions.
+                </p>
+                <Link href="/work/ledgerly" className="link-arrow mt-6">
+                  View project <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Process — horizontal editorial timeline */}
+      <section className="section-pad section-dark overflow-hidden">
+        <div className="container-uq">
+          <SectionHeading
+            tone="dark"
+            eyebrow="Process"
+            title="How projects move from idea to durable software"
+            description="A sequence with clear client involvement — not a theatre of identical cards."
+          />
+          <div className="mt-14 flex gap-0 overflow-x-auto pb-4 md:grid md:grid-cols-6 md:overflow-visible md:pb-0">
+            {processSteps.map((step, index) => (
+              <div
+                key={step.number}
+                className="min-w-[220px] border-l border-white/15 px-5 first:pl-0 md:min-w-0"
+              >
+                <div className="number-lg text-[2.5rem] md:text-[2.75rem]">
+                  {step.number}
+                </div>
+                <h3 className="mt-4 font-display text-lg font-medium text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray">
                   {step.description}
                 </p>
-              </li>
+                {index < processSteps.length - 1 && (
+                  <span className="sr-only">Next step</span>
+                )}
+              </div>
             ))}
-          </ol>
+          </div>
+          <Link href="/process" className="link-arrow mt-10 inline-flex">
+            Full process <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="container-uq">
+      {/* Why UQENA — two-column with rules */}
+      <section className="section-pad section-cream">
+        <div className="container-uq grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading
-            eyebrow="Featured work"
-            title="Conceptual projects"
-            description="These demonstrations illustrate our approach to product craft and engineering — they are not claims about specific clients or live deployments."
-            className="mb-12 md:mb-14"
+            eyebrow="Why UQENA"
+            title="What we optimize for"
+            description="Fewer slogans. More decisions that keep products healthy after launch."
           />
-          <ul className="grid gap-6 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <li key={project.slug}>
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="card-uq focus-ring group flex h-full flex-col overflow-hidden"
-                >
-                  <div className="relative aspect-[16/10] bg-navy-muted">
-                    <Image
-                      src={project.image}
-                      alt=""
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-0 opacity-30"
-                      style={{
-                        background: `linear-gradient(135deg, ${project.accent}40, transparent 60%)`,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <span className="inline-flex w-fit rounded-full border border-[var(--border)] bg-navy-muted px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-gray">
-                      Conceptual project
-                    </span>
-                    <h3 className="mt-4 text-lg font-semibold text-white group-hover:text-blue transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-gray">{project.subtitle}</p>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-gray">
-                      {project.summary}
-                    </p>
-                    <span className="mt-5 inline-flex text-sm font-semibold text-blue">
-                      View demonstration →
-                    </span>
-                  </div>
-                </Link>
-              </li>
+          <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {differentiators.slice(0, 6).map((item) => (
+              <div key={item.title} className="grid gap-2 py-5 md:grid-cols-[12rem_1fr] md:gap-8">
+                <h3 className="font-display text-base font-medium text-ink">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-slate md:text-base">
+                  {item.description}
+                </p>
+              </div>
             ))}
-          </ul>
-          <div className="mt-10 text-center">
-            <Button href="/work" variant="secondary">
-              Browse all demonstrations
-            </Button>
           </div>
         </div>
       </section>
 
-      <section className="section-pad bg-navy-elevated/40">
-        <div className="container-uq">
-          <SectionHeading
-            eyebrow="Why UQENA"
-            title="Built for teams who care about what ships"
-            description="Principles that guide how we architect, collaborate, and deliver."
-            className="mb-12 md:mb-14"
-          />
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {differentiators.map((item) => (
-              <li key={item.title} className="card-uq p-6 md:p-7">
-                <Sparkles className="h-5 w-5 text-blue" aria-hidden />
-                <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray">{item.description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section-pad">
+      {/* Technology — typographic ecosystem, not logo soup */}
+      <section className="section-pad section-paper border-y border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Technology"
-            title="Technology ecosystem"
-            description="Modern stacks chosen for maintainability, performance, and fit — not trend-chasing."
-            className="mb-12 md:mb-14"
+            title="A practical engineering ecosystem"
+            description="Tools chosen for maintainability and fit. Not a partnership claim — a working stack."
           />
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {(Object.entries(technologies) as [string, readonly string[]][]).map(
-              ([category, items]) => (
-                <div key={category} className="card-uq p-6 md:p-7">
-                  <div className="flex items-center gap-2">
-                    <Layers className="h-4 w-4 text-violet" aria-hidden />
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
-                      {category}
-                    </h3>
-                  </div>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {items.map((tech) => (
-                      <li
-                        key={tech}
-                        className="rounded-full border border-[var(--border)] bg-navy-muted px-3 py-1 text-xs font-medium text-gray"
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ),
-            )}
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(technologies).map(([group, items]) => (
+              <div key={group}>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">
+                  {group}
+                </h3>
+                <p className="mt-3 font-display text-xl font-medium leading-snug text-ink">
+                  {items.join(" · ")}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <CtaBand
-        title="Ready to engineer what's next?"
-        description="Tell us about your product, platform, or transformation initiative — we'll respond with clarity on how UQENA can help."
-        ctaLabel="Start a Project"
-        ctaHref="/contact"
-      />
+      <CtaBand />
     </SiteShell>
   );
 }

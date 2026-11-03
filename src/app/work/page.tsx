@@ -23,14 +23,14 @@ export default function WorkPage() {
         secondaryCta={{ label: "Our services", href: "/services" }}
       />
 
-      <section className="section-pad">
+      <section className="section-pad section-cream">
         <div className="container-uq">
           <div
-            className="mb-10 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4 md:px-6 md:py-5"
+            className="mb-10 border border-[var(--line)] bg-paper px-5 py-4 md:px-6 md:py-5"
             role="note"
           >
-            <p className="text-sm leading-relaxed text-white md:text-base">
-              <span className="font-semibold text-amber-200">Conceptual demonstrations only.</span>{" "}
+            <p className="text-sm leading-relaxed text-slate md:text-base">
+              <span className="font-semibold text-ink">Conceptual demonstrations only.</span>{" "}
               Every item in this portfolio is a fictional or sample product concept used to
               showcase design and technical direction. No client names, testimonials, revenue
               figures, or production metrics are represented here.

@@ -15,27 +15,27 @@ export default function CookiePolicyPage() {
   return (
     <SiteShell>
       <PageHero
-        compact
+        tone="paper"
         eyebrow="Legal"
         title="Cookie Policy"
         description="Draft explanation of cookies and similar technologies. Update the cookie inventory after analytics and marketing tools are finalized."
       />
 
-      <section className="section-pad">
-        <div className="container-uq">
+      <section className="section-pad section-cream">
+        <div className="container-uq max-w-3xl">
           <div
-            className="mb-10 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4"
+            className="mb-10 border border-amber-200 bg-amber-50/90 px-5 py-4 md:px-6 md:py-5"
             role="note"
           >
-            <p className="text-sm leading-relaxed text-white">
-              <span className="font-semibold text-amber-200">Review required.</span> List actual
-              cookies and consent mechanisms implemented in production. If no non-essential cookies
-              are used, state that clearly after verification.
+            <p className="text-sm leading-relaxed text-slate">
+              <span className="font-semibold text-ink">Review required.</span> List actual cookies
+              and consent mechanisms implemented in production. If no non-essential cookies are used,
+              state that clearly after verification.
             </p>
           </div>
 
-          <div className="prose-uq max-w-3xl">
-            <p className="text-sm text-gray">Last updated: {lastUpdated}</p>
+          <div className="prose-uq">
+            <p className="text-sm text-slate">Last updated: {lastUpdated}</p>
 
             <h2>1. What are cookies?</h2>
             <p>

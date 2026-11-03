@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  Cloud,
-  Code2,
-  Compass,
-  Globe,
-  Palette,
-  Server,
-  Smartphone,
-  Sparkles,
-  Workflow,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -21,28 +10,16 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { getService, services } from "@/data/services";
 import { siteConfig } from "@/lib/config";
 
-const icons: Record<string, LucideIcon> = {
-  "code-2": Code2,
-  globe: Globe,
-  smartphone: Smartphone,
-  sparkles: Sparkles,
-  palette: Palette,
-  cloud: Cloud,
-  server: Server,
-  workflow: Workflow,
-  compass: Compass,
-};
-
 const serviceImages: Record<string, string> = {
-  "custom-software-development": "/images/services/custom.svg",
-  "web-development": "/images/services/web.svg",
-  "mobile-app-development": "/images/services/mobile.svg",
-  "ai-solutions": "/images/services/ai.svg",
-  "ui-ux-design": "/images/services/design.svg",
-  "cloud-devops": "/images/services/cloud.svg",
-  "backend-api-development": "/images/services/backend.svg",
-  automation: "/images/services/automation.svg",
-  "digital-transformation": "/images/services/transformation.svg",
+  "custom-software-development": "/images/services/custom.jpg",
+  "web-development": "/images/services/web.jpg",
+  "mobile-app-development": "/images/services/mobile.jpg",
+  "ai-solutions": "/images/services/ai.jpg",
+  "ui-ux-design": "/images/services/design.jpg",
+  "cloud-devops": "/images/services/cloud.jpg",
+  "backend-api-development": "/images/services/backend.jpg",
+  automation: "/images/services/automation.jpg",
+  "digital-transformation": "/images/services/transformation.jpg",
 };
 
 type PageProps = {
@@ -72,84 +49,86 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const Icon = icons[service.icon] ?? Code2;
-  const heroImage = serviceImages[service.slug] ?? "/images/services/custom.svg";
+  const heroImage = serviceImages[service.slug] ?? "/images/services/custom.jpg";
+  const layoutVariant = services.findIndex((s) => s.slug === slug) % 3;
 
   return (
     <SiteShell>
       <PageHero
-        compact
         eyebrow={service.heroEyebrow}
         title={service.title}
         description={service.description}
         primaryCta={{ label: "Discuss this service", href: "/contact" }}
         secondaryCta={{ label: "All services", href: "/services" }}
-      >
-        <div className="relative">
-          <div className="card-uq overflow-hidden p-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-navy-muted">
-              <Image
-                src={heroImage}
-                alt=""
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 45vw"
-              />
-            </div>
-          </div>
-          <div className="absolute -bottom-4 -left-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-uq text-white shadow-lg shadow-blue/25">
-            <Icon className="h-7 w-7" />
-          </div>
-        </div>
-      </PageHero>
+        image={heroImage}
+        imageAlt=""
+      />
 
-      <section className="section-pad">
-        <div className="container-uq">
-          <div className="max-w-3xl">
+      <section className="section-pad section-cream">
+        <div className="container-uq grid gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className={layoutVariant === 1 ? "lg:col-span-5" : "lg:col-span-4"}>
             <SectionHeading eyebrow="Value" title="What you gain" />
-            <p className="mt-6 text-lg leading-relaxed text-gray md:text-xl">
-              {service.valueProposition}
-            </p>
           </div>
+          <p
+            className={`text-lg leading-relaxed text-slate md:text-xl ${
+              layoutVariant === 1 ? "lg:col-span-7" : "lg:col-span-8"
+            }`}
+          >
+            {service.valueProposition}
+          </p>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-paper border-y border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Problems we address"
             title="When this service matters"
             description="Situations where focused engineering partnership makes a measurable difference."
           />
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
-            {service.problems.map((problem) => (
-              <li key={problem} className="card-uq flex gap-4 p-5 md:p-6">
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue" aria-hidden />
-                <p className="text-sm leading-relaxed text-gray md:text-base">{problem}</p>
-              </li>
-            ))}
-          </ul>
+          {layoutVariant === 0 ? (
+            <ul className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+              {service.problems.map((problem, i) => (
+                <li
+                  key={problem}
+                  className="grid gap-3 py-5 md:grid-cols-[3rem_1fr] md:gap-6"
+                >
+                  <span className="font-display text-sm text-blue">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm leading-relaxed text-slate md:text-base">{problem}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="mt-10 grid gap-8 lg:grid-cols-2">
+              {service.problems.map((problem) => (
+                <p
+                  key={problem}
+                  className="border-l-2 border-blue pl-5 text-sm leading-relaxed text-slate md:text-base"
+                >
+                  {problem}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
-        <div className="container-uq">
+      <section className="section-pad section-cream">
+        <div className="container-uq grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeading
-            light
             eyebrow="Capabilities"
             title="What we deliver"
             description="Concrete outcomes and workstreams within this service line."
           />
-          <ul className="mt-10 grid gap-3 sm:grid-cols-2">
+          <ul className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {service.capabilities.map((capability) => (
               <li
                 key={capability}
-                className="flex gap-3 rounded-xl border border-slate-200 bg-white px-5 py-4 text-sm text-slate-700 md:text-base"
+                className="flex gap-4 py-4 text-sm text-slate md:text-base"
               >
-                <span className="font-semibold text-blue" aria-hidden>
-                  →
-                </span>
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden />
                 {capability}
               </li>
             ))}
@@ -157,77 +136,87 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="section-pad">
+      <section className="section-pad section-dark">
         <div className="container-uq">
           <SectionHeading
+            tone="dark"
             eyebrow="Stack"
             title="Technology we work with"
             description="Representative tools and platforms for this service — chosen per project requirements."
           />
-          <ul className="mt-10 flex flex-wrap gap-2">
-            {service.stack.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-full border border-[var(--border)] bg-navy-elevated px-4 py-2 text-sm text-gray"
-              >
-                {tech}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-10 max-w-4xl font-display text-2xl font-medium leading-snug text-white md:text-3xl">
+            {service.stack.join(" · ")}
+          </p>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-paper">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Approach"
             title="Our process for this work"
             description="How we move from understanding the problem to shipped, operable results."
           />
-          <ol className="mt-10 grid gap-5 md:grid-cols-2">
+          <ol className="mt-12 space-y-0">
             {service.process.map((step, index) => (
-              <li key={step.title} className="card-uq p-6 md:p-7">
-                <span className="text-sm font-bold text-blue">
+              <li
+                key={step.title}
+                className="grid gap-4 border-t border-[var(--line)] py-8 md:grid-cols-[5rem_14rem_1fr] md:gap-8"
+              >
+                <span className="font-display text-sm text-blue">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray">{step.description}</p>
+                <h3 className="font-display text-lg font-medium text-ink">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-slate md:text-base">
+                  {step.description}
+                </p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
+      <section className="section-pad section-cream border-t border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
-            light
             eyebrow="Applications"
             title="Typical use cases"
             description="Examples of where clients engage UQENA for this capability."
           />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-10 columns-1 gap-x-12 sm:columns-2">
             {service.useCases.map((useCase) => (
               <li
                 key={useCase}
-                className="rounded-[var(--radius-lg)] border border-slate-200 bg-white p-6"
+                className="mb-4 break-inside-avoid text-sm leading-relaxed text-slate md:text-base"
               >
-                <p className="font-medium text-navy">{useCase}</p>
+                <span className="font-semibold text-ink">{useCase}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <SectionHeading
-              eyebrow="FAQs"
-              title={`${service.shortTitle} questions`}
-              description={`Answers about how ${siteConfig.name} delivers ${service.title.toLowerCase()}.`}
-            />
-            <FaqAccordion items={service.faqs} />
+      <section className="section-pad section-paper">
+        <div className="container-uq grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <SectionHeading
+            eyebrow="FAQs"
+            title={`${service.shortTitle} questions`}
+            description={`Answers about how ${siteConfig.name} delivers ${service.title.toLowerCase()}.`}
+          />
+          <FaqAccordion items={service.faqs} />
+        </div>
+      </section>
+
+      <section className="section-pad section-cream border-t border-[var(--line)]">
+        <div className="container-uq flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-slate">Explore related pages</p>
+          <div className="flex flex-wrap gap-6">
+            <Link href="/solutions" className="link-arrow">
+              Solutions <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link href="/process" className="link-arrow">
+              Process <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

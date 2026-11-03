@@ -6,7 +6,7 @@ type Props = {
   description?: string;
   align?: "left" | "center";
   className?: string;
-  light?: boolean;
+  tone?: "light" | "dark";
 };
 
 export function SectionHeading({
@@ -15,7 +15,7 @@ export function SectionHeading({
   description,
   align = "left",
   className,
-  light = false,
+  tone = "light",
 }: Props) {
   return (
     <div
@@ -25,11 +25,15 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
+      {eyebrow && (
+        <p className={cn("eyebrow mb-4", align === "center" && "justify-center")}>
+          {eyebrow}
+        </p>
+      )}
       <h2
         className={cn(
-          "text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]",
-          light ? "text-navy" : "text-white",
+          "font-display text-3xl font-medium tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.12]",
+          tone === "dark" ? "text-white" : "text-ink",
         )}
       >
         {title}
@@ -37,8 +41,9 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-4 text-base md:text-lg",
-            light ? "text-slate-600" : "text-gray",
+            "mt-4 max-w-2xl text-base md:text-lg",
+            tone === "dark" ? "text-gray" : "text-slate",
+            align === "center" && "mx-auto",
           )}
         >
           {description}

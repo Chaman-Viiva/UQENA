@@ -4,19 +4,17 @@ import { siteConfig } from "@/lib/config";
 import { footerNavigation } from "@/data/navigation";
 
 export function Footer() {
-  const year = 2026;
-
   return (
-    <footer className="border-t border-[var(--border)] bg-navy-elevated">
-      <div className="container-uq section-pad !pb-10 !pt-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <footer className="border-t border-white/10 bg-midnight text-white">
+      <div className="container-uq py-16 md:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.35fr_repeat(3,1fr)]">
           <div className="max-w-sm">
-            <Logo showTagline />
+            <Logo variant="dark" showTagline />
             <p className="mt-5 text-sm leading-relaxed text-gray">
-              UQENA helps ambitious businesses design, build, and scale intelligent
-              digital products — with engineering precision and long-term partnership.
+              Software engineering and digital product partnership for teams that need
+              clarity, craft, and systems built to last.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {(
                 [
                   { href: siteConfig.social.linkedin, label: "LinkedIn" },
@@ -27,7 +25,7 @@ export function Footer() {
                 <a
                   key={social.href}
                   href={social.href}
-                  className="focus-ring inline-flex rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-semibold text-gray transition hover:border-blue hover:text-white"
+                  className="focus-ring inline-flex rounded-[var(--radius)] border border-white/15 px-3 py-1.5 text-xs font-semibold text-gray transition hover:border-white/40 hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -35,6 +33,11 @@ export function Footer() {
                 </a>
               ))}
             </div>
+            <p className="mt-6 text-sm text-gray">
+              <a className="text-white underline-offset-4 hover:underline" href={siteConfig.contact.mailto}>
+                {siteConfig.contact.email}
+              </a>
+            </p>
           </div>
 
           <FooterColumn title="Company" links={footerNavigation.company} />
@@ -42,21 +45,11 @@ export function Footer() {
           <FooterColumn title="Industries" links={footerNavigation.industries} />
         </div>
 
-        <div className="mt-14 grid gap-6 border-t border-[var(--border)] pt-8 md:grid-cols-[1fr_auto] md:items-center">
-          <div className="space-y-2 text-sm text-gray">
-            <p>
-              Contact:{" "}
-              <a className="text-blue hover:underline" href={siteConfig.contact.mailto}>
-                {siteConfig.contact.email}
-              </a>
-            </p>
-            <p>{siteConfig.contact.locationLabel}</p>
-            <p className="text-xs opacity-80">{siteConfig.contact.locationNote}</p>
-            <p className="text-xs opacity-80">
-              Phone: {siteConfig.contact.phone}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-4 text-sm text-gray">
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs text-gray/80">
+            © 2026 {siteConfig.legalName}. All rights reserved.
+          </p>
+          <div className="flex flex-wrap gap-4 text-xs text-gray">
             {footerNavigation.legal.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-white">
                 {link.label}
@@ -64,10 +57,6 @@ export function Footer() {
             ))}
           </div>
         </div>
-
-        <p className="mt-8 text-xs text-gray/80">
-          © {year} {siteConfig.legalName}. All rights reserved. Engineering What&apos;s Next.
-        </p>
       </div>
     </footer>
   );
@@ -82,11 +71,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h2 className="text-sm font-semibold tracking-wide text-white">{title}</h2>
+      <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-gray">
+        {title}
+      </h2>
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="text-sm text-gray transition hover:text-white">
+            <Link href={link.href} className="text-sm text-white/80 transition hover:text-white">
               {link.label}
             </Link>
           </li>

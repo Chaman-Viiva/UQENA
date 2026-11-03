@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Users } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { Button } from "@/components/ui/Button";
-import { ServiceCard } from "@/components/cards/ServiceCard";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { dedicatedTeamsService, services } from "@/data/services";
 import { differentiators, processSteps, technologies } from "@/data/process";
@@ -55,45 +55,59 @@ export default function ServicesPage() {
         description={`From first concept to long-term evolution, ${siteConfig.name} helps you design, build, and operate digital systems with clarity and craft.`}
         primaryCta={{ label: "Start a conversation", href: "/contact" }}
         secondaryCta={{ label: "View our work", href: "/work" }}
+        image="/images/services/engineering.jpg"
+        imageAlt="Engineering workspace with monitors and architectural sketches"
       />
 
-      <section className="section-pad">
+      <section className="section-pad section-cream border-b border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="What we deliver"
             title="End-to-end capabilities for ambitious teams"
             description="Choose a focused engagement or combine services into one coherent delivery path."
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard
+          <div className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {services.map((service, index) => (
+              <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                title={service.title}
-                summary={service.summary}
-                icon={service.icon}
-              />
+                className="group grid gap-4 py-7 transition md:grid-cols-[5rem_1fr_1.2fr_auto] md:items-baseline md:gap-8"
+              >
+                <span className="font-display text-sm text-blue">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-xl font-medium text-ink group-hover:text-blue md:text-2xl">
+                  {service.shortTitle}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate md:text-base">
+                  {service.summary}
+                </p>
+                <span className="text-sm font-semibold text-blue opacity-0 transition group-hover:opacity-100 md:justify-self-end">
+                  Explore →
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
-        <div className="container-uq">
+      <section className="section-pad section-paper">
+        <div className="container-uq grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading
-            light
             eyebrow="Why partner with us"
             title="Business benefits that compound"
             description="Technology choices should serve how you compete, operate, and grow — not the other way around."
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {differentiators.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[var(--radius-lg)] border border-slate-200 bg-white p-6 md:p-7"
+                className="grid gap-2 py-5 md:grid-cols-[12rem_1fr] md:gap-8"
               >
-                <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <h3 className="font-display text-base font-medium text-ink">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate md:text-base">
                   {item.description}
                 </p>
               </div>
@@ -102,95 +116,99 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="section-pad">
+      <section className="section-pad section-dark">
         <div className="container-uq">
-          <SectionHeading
-            eyebrow="How we work"
-            title="A process overview"
-            description="Structured enough to manage risk, flexible enough to learn as we build."
-          />
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              tone="dark"
+              eyebrow="How we work"
+              title="A process overview"
+              description="Structured enough to manage risk, flexible enough to learn as we build."
+            />
+            <Link href="/process" className="link-arrow shrink-0">
+              Full process <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-14 flex gap-0 overflow-x-auto pb-4 md:grid md:grid-cols-6 md:overflow-visible md:pb-0">
             {processSteps.map((step) => (
-              <div key={step.number} className="card-uq p-6 md:p-7">
-                <span className="text-sm font-bold text-blue">{step.number}</span>
-                <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray">{step.description}</p>
+              <div
+                key={step.number}
+                className="min-w-[220px] border-l border-white/15 px-5 first:pl-0 md:min-w-0"
+              >
+                <div className="number-lg text-[2.5rem] md:text-[2.75rem]">
+                  {step.number}
+                </div>
+                <h3 className="mt-4 font-display text-lg font-medium text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray">
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
+      <section className="section-pad section-paper border-y border-[var(--line)]">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Technology"
             title="Technical expertise across the stack"
             description="We select tools for maintainability and fit — the lists below reflect common foundations across our service lines."
           />
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(technologies).map(([category, items]) => (
-              <div key={category} className="card-uq p-6 md:p-7">
-                <h3 className="text-base font-semibold text-white">{category}</h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {items.map((tech) => (
-                    <li
-                      key={tech}
-                      className="rounded-full border border-[var(--border)] bg-navy-muted px-3 py-1 text-sm text-gray"
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
+              <div key={category}>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate">
+                  {category}
+                </h3>
+                <p className="mt-3 font-display text-xl font-medium leading-snug text-ink">
+                  {items.join(" · ")}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="container-uq">
-          <div className="card-uq grid gap-10 overflow-hidden p-8 md:p-12 lg:grid-cols-[1fr_0.85fr] lg:items-center">
-            <div>
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-uq text-white shadow-lg shadow-blue/20">
-                <Users className="h-5 w-5" />
-              </div>
-              <h2 className="mt-5 text-3xl font-bold tracking-tight text-white md:text-4xl">
-                {dedicatedTeamsService.title}
-              </h2>
-              <p className="mt-4 text-lg text-gray">{dedicatedTeamsService.summary}</p>
-              <p className="mt-4 text-base leading-relaxed text-gray">
-                {dedicatedTeamsService.description}
-              </p>
-              <div className="mt-8">
-                <Button href="/contact" size="lg">
-                  Discuss dedicated teams
-                </Button>
-              </div>
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-navy-muted">
-              <Image
-                src="/images/services/custom.svg"
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
+      <section className="section-pad section-cream">
+        <div className="container-uq grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+          <div className="img-frame relative aspect-[4/3] rounded-[var(--radius-md)]">
+            <Image
+              src="/images/services/custom.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+          <div>
+            <p className="eyebrow mb-4">Extended capacity</p>
+            <h2 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl">
+              {dedicatedTeamsService.title}
+            </h2>
+            <p className="mt-4 text-lg text-slate">{dedicatedTeamsService.summary}</p>
+            <p className="mt-4 text-base leading-relaxed text-slate">
+              {dedicatedTeamsService.description}
+            </p>
+            <div className="mt-8">
+              <Button href="/contact" size="lg">
+                Discuss dedicated teams
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <SectionHeading
-              eyebrow="Questions"
-              title="Services FAQs"
-              description="Common questions about how UQENA scopes and delivers engineering work."
-            />
-            <FaqAccordion items={servicesLandingFaqs} />
-          </div>
+      <section className="section-pad section-paper">
+        <div className="container-uq grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <SectionHeading
+            eyebrow="Questions"
+            title="Services FAQs"
+            description="Common questions about how UQENA scopes and delivers engineering work."
+          />
+          <FaqAccordion items={servicesLandingFaqs} />
         </div>
       </section>
 

@@ -15,28 +15,28 @@ export default function PrivacyPolicyPage() {
   return (
     <SiteShell>
       <PageHero
-        compact
+        tone="paper"
         eyebrow="Legal"
         title="Privacy Policy"
         description={`Draft policy for ${siteConfig.name}. Company-specific details marked below require legal and business review before publication.`}
       />
 
-      <section className="section-pad">
-        <div className="container-uq">
+      <section className="section-pad section-cream">
+        <div className="container-uq max-w-3xl">
           <div
-            className="mb-10 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4"
+            className="mb-10 border border-amber-200 bg-amber-50/90 px-5 py-4 md:px-6 md:py-5"
             role="note"
           >
-            <p className="text-sm leading-relaxed text-white">
-              <span className="font-semibold text-amber-200">Review required.</span> This is a
-              draft template. Replace bracketed placeholders with verified legal entity details,
+            <p className="text-sm leading-relaxed text-slate">
+              <span className="font-semibold text-ink">Review required.</span> This is a draft
+              template. Replace bracketed placeholders with verified legal entity details,
               jurisdiction, data processors, and retention practices before relying on it
               operationally.
             </p>
           </div>
 
-          <div className="prose-uq max-w-3xl">
-            <p className="text-sm text-gray">Last updated: {lastUpdated}</p>
+          <div className="prose-uq">
+            <p className="text-sm text-slate">Last updated: {lastUpdated}</p>
 
             <h2>1. Who we are</h2>
             <p>
@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p>
               Registered address:{" "}
-              <strong>[Insert verified registered office address — currently placeholder in site config.]</strong>
+              <strong>[Insert verified registered office address — confirm with counsel.]</strong>
             </p>
             <p>
               Privacy contact:{" "}

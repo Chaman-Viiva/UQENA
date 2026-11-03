@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -7,9 +8,11 @@ type Props = {
   description?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
-  children?: React.ReactNode;
+  image?: string;
+  imageAlt?: string;
+  tone?: "dark" | "paper";
   className?: string;
-  compact?: boolean;
+  children?: React.ReactNode;
 };
 
 export function PageHero({
@@ -18,44 +21,81 @@ export function PageHero({
   description,
   primaryCta,
   secondaryCta,
-  children,
+  image,
+  imageAlt = "",
+  tone = "dark",
   className,
-  compact,
+  children,
 }: Props) {
+  const dark = tone === "dark";
+
   return (
     <section
+      id="site-hero"
       className={cn(
-        "relative overflow-hidden bg-horizon",
-        compact ? "pb-16 pt-12 md:pb-20 md:pt-16" : "pb-20 pt-14 md:pb-28 md:pt-20",
+        "relative overflow-hidden border-b",
+        dark
+          ? "border-white/10 bg-midnight text-white"
+          : "border-[var(--line)] bg-paper text-ink",
         className,
       )}
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-      <div className="container-uq relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="animate-fade-up">
+      <div className="container-uq grid items-end gap-10 pb-16 pt-[calc(var(--header-h)+3rem)] md:pb-24 md:pt-[calc(var(--header-h)+4.5rem)] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+        <div className="animate-rise max-w-3xl">
           {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
-          <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl lg:leading-[1.05]">
+          <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
             {title}
           </h1>
           {description && (
-            <p className="mt-6 max-w-2xl text-lg text-gray md:text-xl">{description}</p>
+            <p
+              className={cn(
+                "mt-6 max-w-xl text-lg leading-relaxed",
+                dark ? "text-gray" : "text-slate",
+              )}
+            >
+              {description}
+            </p>
           )}
           {(primaryCta || secondaryCta) && (
             <div className="mt-8 flex flex-wrap gap-3">
               {primaryCta && (
-                <Button href={primaryCta.href} size="lg">
+                <Button
+                  href={primaryCta.href}
+                  size="lg"
+                  variant={dark ? "inverse" : "primary"}
+                >
                   {primaryCta.label}
                 </Button>
               )}
               {secondaryCta && (
-                <Button href={secondaryCta.href} variant="secondary" size="lg">
+                <Button
+                  href={secondaryCta.href}
+                  size="lg"
+                  variant={dark ? "outline-light" : "ghost"}
+                >
                   {secondaryCta.label}
                 </Button>
               )}
             </div>
           )}
         </div>
-        {children && <div className="animate-fade-up delay-2">{children}</div>}
+
+        {(image || children) && (
+          <div className="animate-rise delay-2">
+            {children ?? (
+              <div className="img-frame relative aspect-[4/3] rounded-[var(--radius-md)]">
+                <Image
+                  src={image!}
+                  alt={imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:1024px) 100vw, 480px"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

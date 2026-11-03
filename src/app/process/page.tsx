@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -13,6 +15,14 @@ export const metadata: Metadata = {
     "UQENA delivery process — discover, strategize, design, engineer, launch, and evolve, with clear deliverables and client involvement at every stage.",
 };
 
+const engagementCommitments = [
+  "Regular demos of working software — not slide-only updates",
+  "Written capture of decisions, scope changes, and open questions",
+  "Early conversation about non-functional needs: security, performance, compliance",
+  "Launch planning that includes rollback paths and support windows",
+  "Post-launch iteration informed by usage, not only the original spec",
+];
+
 export default function ProcessPage() {
   return (
     <SiteShell>
@@ -22,9 +32,11 @@ export default function ProcessPage() {
         description={`${siteConfig.name} structures engagements so risk is managed, decisions stay shared, and working software appears early — then improves with real usage.`}
         primaryCta={{ label: "Discuss your timeline", href: "/contact" }}
         secondaryCta={{ label: "View services", href: "/services" }}
+        image="/images/hero/architecture.jpg"
+        imageAlt="Architectural drawing and structure"
       />
 
-      <section className="section-pad">
+      <section className="section-pad section-cream border-b border-[var(--line)]">
         <div className="container-uq max-w-3xl">
           <SectionHeading
             eyebrow="Overview"
@@ -34,76 +46,76 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      <section className="section-pad border-t border-[var(--border)]">
-        <div className="container-uq space-y-16">
-          {processSteps.map((step, index) => (
-            <article
-              key={step.number}
-              className="grid gap-8 border-b border-[var(--border)] pb-16 last:border-b-0 last:pb-0 lg:grid-cols-[minmax(0,240px)_1fr]"
-            >
-              <div>
-                <span className="text-sm font-bold text-blue">{step.number}</span>
-                <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">{step.title}</h2>
-                <p className="mt-3 text-sm text-gray">{step.description}</p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="card-uq p-6 md:p-7">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-blue">
-                    Deliverables
-                  </h3>
-                  <ul className="mt-4 space-y-2">
-                    {step.deliverables.map((item) => (
-                      <li
-                        key={item}
-                        className="flex gap-2 text-sm leading-relaxed text-gray md:text-base"
-                      >
-                        <span className="text-blue" aria-hidden>
-                          ·
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+      <section className="section-pad section-paper">
+        <div className="container-uq">
+          <ol className="relative border-l border-[var(--line)] pl-8 md:pl-12">
+            {processSteps.map((step, index) => (
+              <li key={step.number} className="relative pb-16 last:pb-0">
+                <span
+                  className="absolute -left-8 top-0 flex h-6 w-6 items-center justify-center rounded-full border border-[var(--line)] bg-paper md:-left-12 md:h-7 md:w-7"
+                  aria-hidden
+                >
+                  <span className="h-2 w-2 rounded-full bg-blue" />
+                </span>
+
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,220px)_1fr] lg:gap-12">
+                  <div>
+                    <p className="font-display text-sm text-blue">{step.number}</p>
+                    <h2 className="mt-2 font-display text-2xl font-medium text-ink md:text-3xl">
+                      {step.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-slate">{step.description}</p>
+                  </div>
+
+                  <div className="grid gap-8 border-t border-[var(--line)] pt-8 lg:border-t-0 lg:border-l lg:pl-12 lg:pt-0">
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
+                        Deliverables
+                      </h3>
+                      <ul className="mt-4 space-y-2">
+                        {step.deliverables.map((item) => (
+                          <li
+                            key={item}
+                            className="flex gap-3 text-sm leading-relaxed text-slate md:text-base"
+                          >
+                            <span className="text-blue" aria-hidden>
+                              ·
+                            </span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-blue">
+                        Your involvement
+                      </h3>
+                      <p className="mt-4 text-sm leading-relaxed text-slate md:text-base">
+                        {step.clientInvolvement}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="card-uq p-6 md:p-7">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-blue">
-                    Your involvement
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-gray md:text-base">
-                    {step.clientInvolvement}
-                  </p>
-                </div>
-              </div>
-              {index < processSteps.length - 1 && (
-                <div className="hidden lg:col-span-2 lg:block" aria-hidden>
-                  <div className="ml-[120px] h-px w-12 bg-[var(--border)]" />
-                </div>
-              )}
-            </article>
-          ))}
+
+                {index < processSteps.length - 1 && (
+                  <span className="sr-only">Next: {processSteps[index + 1]?.title}</span>
+                )}
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
-        <div className="container-uq">
+      <section className="section-pad section-cream border-y border-[var(--line)]">
+        <div className="container-uq grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeading
-            light
             eyebrow="Engagement"
             title="What to expect from us"
             description="Practical commitments that sit behind the stage names."
           />
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
-            {[
-              "Regular demos of working software — not slide-only updates",
-              "Written capture of decisions, scope changes, and open questions",
-              "Early conversation about non-functional needs: security, performance, compliance",
-              "Launch planning that includes rollback paths and support windows",
-              "Post-launch iteration informed by usage, not only the original spec",
-            ].map((item) => (
-              <li
-                key={item}
-                className="rounded-[var(--radius-lg)] border border-slate-200 bg-white px-5 py-4 text-sm text-slate-700 md:text-base"
-              >
+          <ul className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {engagementCommitments.map((item) => (
+              <li key={item} className="py-4 text-sm leading-relaxed text-slate md:text-base">
                 {item}
               </li>
             ))}
@@ -111,23 +123,33 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="container-uq">
-          <div className="card-uq flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between md:p-10">
-            <div>
-              <h2 className="text-2xl font-bold text-white">See capabilities in context</h2>
-              <p className="mt-2 max-w-xl text-gray">
-                Services describe what we build; solutions describe product patterns; industries
-                describe domain context.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button href="/services">Services</Button>
-              <Button href="/solutions" variant="secondary">
-                Solutions
-              </Button>
-            </div>
+      <section className="section-pad section-dark">
+        <div className="container-uq grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <h2 className="font-display text-2xl font-medium text-white md:text-3xl">
+              See capabilities in context
+            </h2>
+            <p className="mt-3 max-w-xl text-gray">
+              Services describe what we build; solutions describe product patterns; industries
+              describe domain context.
+            </p>
           </div>
+          <div className="flex flex-wrap gap-3">
+            <Button href="/services" variant="inverse" size="md">
+              Services
+            </Button>
+            <Button href="/solutions" variant="outline-light" size="md">
+              Solutions
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad section-paper">
+        <div className="container-uq">
+          <Link href="/about" className="link-arrow inline-flex">
+            About UQENA <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

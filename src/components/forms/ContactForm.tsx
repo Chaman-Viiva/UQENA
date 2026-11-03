@@ -27,6 +27,9 @@ const budgets = [
   "Prefer to discuss",
 ];
 
+const fieldClass =
+  "focus-ring w-full rounded-[var(--radius)] border border-[var(--line)] bg-white px-4 py-3 text-sm text-ink placeholder:text-slate/60";
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -74,7 +77,6 @@ export function ContactForm() {
       `Name: ${payload.name}\nEmail: ${payload.email}\nCompany: ${payload.company}\nService: ${payload.service}\nBudget: ${payload.budget}\nPreferred contact: ${payload.method}\n\nProject description:\n${payload.description}`,
     );
 
-    // Frontend-only demo: open mailto as configurable fallback. No backend submission occurs.
     window.location.href = `${siteConfig.contact.mailto}?subject=${subject}&body=${body}`;
     setStatus("success");
     formEl.reset();
@@ -113,29 +115,28 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="description" className="mb-2 block text-sm font-medium text-white">
+          <label htmlFor="description" className="mb-2 block text-sm font-medium text-ink">
             Project description <span className="text-blue">*</span>
           </label>
           <textarea
             id="description"
             name="description"
             rows={6}
-            className="focus-ring w-full rounded-xl border border-[var(--border)] bg-navy px-4 py-3 text-sm text-white placeholder:text-gray/60"
+            className={fieldClass}
             placeholder="Tell us about the problem, timeline, and what success looks like."
             aria-invalid={!!errors.description}
             aria-describedby={errors.description ? "description-error" : undefined}
           />
           {errors.description && (
-            <p id="description-error" className="mt-1.5 text-sm text-red-400">
+            <p id="description-error" className="mt-1.5 text-sm text-red-600">
               {errors.description}
             </p>
           )}
         </div>
 
-        <p className="text-xs leading-relaxed text-gray">
-          This is a frontend-only demo form. Submitting opens your email client with a
-          prefilled message to {siteConfig.contact.email}. No data is stored on a server.
-          Update the destination in <code className="text-blue">src/lib/config.ts</code>.
+        <p className="text-xs leading-relaxed text-slate">
+          Submitting opens your email client with a prefilled message to{" "}
+          {siteConfig.contact.email}. No data is stored on a UQENA server from this form.
         </p>
 
         <Button type="submit" size="lg">
@@ -145,16 +146,22 @@ export function ContactForm() {
 
       {status === "success" && (
         <div
-          className="mt-6 rounded-xl border border-blue/40 bg-blue/10 px-4 py-3 text-sm text-white"
+          className="mt-6 rounded-[var(--radius)] border border-blue/30 bg-blue/5 px-4 py-3 text-sm text-ink"
           role="status"
         >
           Your email client should open with the inquiry details. If it does not, email us
-          directly at {siteConfig.contact.email}. Nothing has been transmitted to a UQENA
-          server from this page.
+          directly at{" "}
+          <a href={siteConfig.contact.mailto} className="font-medium text-blue hover:underline">
+            {siteConfig.contact.email}
+          </a>
+          .
         </div>
       )}
       {status === "error" && Object.keys(errors).length > 0 && (
-        <div className="mt-6 rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-200" role="alert">
+        <div
+          className="mt-6 rounded-[var(--radius)] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+          role="alert"
+        >
           Please correct the highlighted fields and try again.
         </div>
       )}
@@ -179,7 +186,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-sm font-medium text-white">
+      <label htmlFor={name} className="mb-2 block text-sm font-medium text-ink">
         {label} {required && <span className="text-blue">*</span>}
       </label>
       <input
@@ -187,12 +194,12 @@ function Field({
         name={name}
         type={type}
         autoComplete={autoComplete}
-        className="focus-ring w-full rounded-xl border border-[var(--border)] bg-navy px-4 py-3 text-sm text-white placeholder:text-gray/60"
+        className={fieldClass}
         aria-invalid={!!error}
         aria-describedby={error ? `${name}-error` : undefined}
       />
       {error && (
-        <p id={`${name}-error`} className="mt-1.5 text-sm text-red-400">
+        <p id={`${name}-error`} className="mt-1.5 text-sm text-red-600">
           {error}
         </p>
       )}
@@ -211,15 +218,10 @@ function SelectField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-sm font-medium text-white">
+      <label htmlFor={name} className="mb-2 block text-sm font-medium text-ink">
         {label}
       </label>
-      <select
-        id={name}
-        name={name}
-        className="focus-ring w-full rounded-xl border border-[var(--border)] bg-navy px-4 py-3 text-sm text-white"
-        defaultValue=""
-      >
+      <select id={name} name={name} className={fieldClass} defaultValue="">
         <option value="" disabled>
           Select an option
         </option>

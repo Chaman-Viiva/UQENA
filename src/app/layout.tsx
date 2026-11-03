@@ -1,10 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
 
 const manrope = Manrope({
   variable: "--font-manrope",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
 });
@@ -28,12 +34,8 @@ export const metadata: Metadata = {
     "mobile app development",
     "AI solutions",
     "digital transformation",
-    "UI UX design",
-    "cloud devops",
   ],
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
@@ -56,10 +58,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
   icons: {
     icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/brand/app-icon.svg" }],
@@ -67,15 +66,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B1020",
+  themeColor: "#080F24",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-navy text-white font-sans">
+    <html
+      lang="en"
+      className={`${manrope.variable} ${spaceGrotesk.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-cream text-ink font-sans">
         {children}
       </body>
     </html>

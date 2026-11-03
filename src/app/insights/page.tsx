@@ -23,7 +23,7 @@ export default function InsightsPage() {
         secondaryCta={{ label: "Our services", href: "/services" }}
       />
 
-      <section className="section-pad">
+      <section className="section-pad section-cream">
         <div className="container-uq">
           <SectionHeading
             eyebrow="Articles"
