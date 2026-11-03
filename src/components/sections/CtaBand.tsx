@@ -18,7 +18,7 @@ export function CtaBand({
       <div className="container-uq">
         <div className="grid gap-8 border border-white/10 bg-navy-soft p-8 md:grid-cols-[1.4fr_auto] md:items-end md:p-12 lg:p-14">
           <div className="max-w-2xl">
-            <p className="eyebrow mb-4">Next step</p>
+            <p className="eyebrow mb-3 !text-white/55">Next step</p>
             <h2 className="font-display text-3xl font-medium tracking-tight text-white md:text-4xl lg:text-5xl">
               {title}
             </h2>

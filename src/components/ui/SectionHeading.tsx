@@ -26,7 +26,13 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className={cn("eyebrow mb-4", align === "center" && "justify-center")}>
+        <p
+          className={cn(
+            "eyebrow mb-3",
+            tone === "dark" && "!text-white/55",
+            align === "center" && "text-center",
+          )}
+        >
           {eyebrow}
         </p>
       )}
@@ -41,7 +47,7 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-4 max-w-2xl text-base md:text-lg",
+            "mt-4 max-w-2xl text-base leading-relaxed md:text-lg",
             tone === "dark" ? "text-gray" : "text-slate",
             align === "center" && "mx-auto",
           )}

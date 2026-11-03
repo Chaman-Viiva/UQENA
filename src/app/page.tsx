@@ -44,7 +44,6 @@ export default function HomePage() {
       <section className="section-pad section-cream">
         <div className="container-uq grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <p className="eyebrow mb-4">The studio</p>
             <h2 className="font-display text-3xl font-medium tracking-tight text-ink md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
               A technology partner for work that has to ship — and stay coherent.
             </h2>

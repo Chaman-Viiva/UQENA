@@ -18,7 +18,7 @@ export function HomeHero() {
       <div className="container-uq relative flex min-h-[92vh] flex-col justify-center pb-20 pt-[calc(var(--header-h)+2rem)] md:pb-24">
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
           <div className="animate-rise max-w-3xl">
-            <p className="eyebrow mb-6 !text-[#7dd3fc]">Software engineering studio</p>
+            <p className="eyebrow mb-5">Software engineering studio</p>
             <h1 className="font-display text-5xl font-medium tracking-tight text-white md:text-6xl lg:text-[4.75rem] lg:leading-[0.98]">
               Engineering
               <br />

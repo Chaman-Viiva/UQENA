@@ -87,6 +87,12 @@ a {
   text-decoration: none;
 }
 
+/* Never let inherited section colors wipe button labels */
+a.btn-uq,
+button.btn-uq {
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -135,22 +141,84 @@ img {
   color: var(--ink);
 }
 
+/* Clean editorial section label — no decorative prefixes */
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
+  display: block;
+  margin: 0;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--slate-deep);
 }
 
-.eyebrow::before {
-  content: "";
-  width: 1.25rem;
-  height: 1px;
-  background: currentColor;
+.section-dark .eyebrow,
+#site-hero .eyebrow {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Bulletproof button contrast (overrides inherited link color) */
+.btn-uq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.2s ease;
+}
+
+.btn-uq-primary {
+  background-color: #1677f8 !important;
+  color: #ffffff !important;
+  border: none;
+}
+.btn-uq-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-uq-secondary {
+  background-color: #0c1222 !important;
+  color: #ffffff !important;
+  border: none;
+}
+.btn-uq-secondary:hover {
+  filter: brightness(1.15);
+}
+
+.btn-uq-inverse {
+  background-color: #ffffff !important;
+  color: #0c1222 !important;
+  border: none;
+}
+.btn-uq-inverse:hover {
+  background-color: #f3efe8 !important;
+  color: #0c1222 !important;
+}
+
+.btn-uq-ghost {
+  background-color: transparent !important;
+  color: #0c1222 !important;
+  border: none;
+}
+.btn-uq-ghost:hover {
+  background-color: #e8e2d8 !important;
+}
+
+.btn-uq-outline-light {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+}
+.btn-uq-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .rule {
