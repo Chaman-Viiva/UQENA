@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 export function HomeHero() {
   return (
-    <section id="site-hero" className="relative min-h-[88vh] overflow-hidden bg-midnight text-white">
+    <section id="site-hero" data-nav="dark" className="relative min-h-[100svh] overflow-hidden bg-midnight text-white">
       <Image
         src="/images/hero/architecture.jpg"
         alt="Contemporary architectural facade with precise structural lines"
@@ -15,24 +15,24 @@ export function HomeHero() {
       <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/85 to-midnight/35" />
       <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-midnight/40" />
 
-      <div className="container-uq relative flex min-h-[92vh] flex-col justify-center pb-20 pt-[calc(var(--header-h)+2rem)] md:pb-24">
+      <div className="container-uq relative flex min-h-[100svh] flex-col justify-center pb-16 pt-[calc(var(--header-h)+env(safe-area-inset-top,0px)+1.5rem)] sm:pb-20 md:pb-24 md:pt-[calc(var(--header-h)+2rem)]">
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
           <div className="animate-rise max-w-3xl">
-            <p className="eyebrow mb-5">Software engineering studio</p>
-            <h1 className="font-display text-5xl font-medium tracking-tight text-white md:text-6xl lg:text-[4.75rem] lg:leading-[0.98]">
+            <p className="eyebrow mb-4 sm:mb-5">Software engineering studio</p>
+            <h1 className="font-display text-[2.5rem] font-medium leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.75rem] lg:leading-[0.98]">
               Engineering
               <br />
               What&apos;s Next.
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-gray md:text-xl">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-gray sm:mt-7 sm:text-lg md:text-xl">
               From ambitious ideas to intelligent digital products, UQENA helps
               businesses design, build, and scale technology that moves them forward.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Button href="/contact" size="lg" variant="inverse">
+            <div className="mt-7 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row sm:flex-wrap">
+              <Button href="/contact" size="lg" variant="inverse" className="w-full sm:w-auto">
                 Start a Project
               </Button>
-              <Button href="/work" size="lg" variant="outline-light">
+              <Button href="/work" size="lg" variant="outline-light" className="w-full sm:w-auto">
                 View selected work
               </Button>
             </div>

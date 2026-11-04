@@ -60,15 +60,23 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   icons: {
-    icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/brand/app-icon.svg" }],
+    icon: [
+      { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/favicon-64.png", sizes: "64x64", type: "image/png" },
+      { url: "/brand/uqena-mark-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/uqena-app-icon.png", sizes: "512x512", type: "image/png" }],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080F24",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#080F24" },
+  ],
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

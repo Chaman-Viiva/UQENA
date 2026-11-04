@@ -82,7 +82,7 @@ export default function ServicesPage() {
                 <p className="text-sm leading-relaxed text-slate md:text-base">
                   {service.summary}
                 </p>
-                <span className="text-sm font-semibold text-blue opacity-0 transition group-hover:opacity-100 md:justify-self-end">
+                <span className="text-sm font-semibold text-blue md:justify-self-end md:opacity-0 md:transition md:group-hover:opacity-100 md:group-focus-within:opacity-100">
                   Explore →
                 </span>
               </Link>

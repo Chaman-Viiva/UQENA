@@ -32,6 +32,7 @@ export function PageHero({
   return (
     <section
       id="site-hero"
+      data-nav={dark ? "dark" : "light"}
       className={cn(
         "relative overflow-hidden border-b",
         dark
@@ -40,16 +41,16 @@ export function PageHero({
         className,
       )}
     >
-      <div className="container-uq grid items-end gap-10 pb-16 pt-[calc(var(--header-h)+3rem)] md:pb-24 md:pt-[calc(var(--header-h)+4.5rem)] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+      <div className="container-uq grid items-end gap-8 pb-12 pt-[calc(var(--header-h)+env(safe-area-inset-top,0px)+2rem)] sm:gap-10 sm:pb-16 md:pb-24 md:pt-[calc(var(--header-h)+4.5rem)] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
         <div className="animate-rise max-w-3xl">
-          {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
-          <h1 className="font-display text-4xl font-medium tracking-tight md:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+          {eyebrow && <p className="eyebrow mb-4 sm:mb-5">{eyebrow}</p>}
+          <h1 className="font-display text-[2rem] font-medium leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
             {title}
           </h1>
           {description && (
             <p
               className={cn(
-                "mt-6 max-w-xl text-lg leading-relaxed",
+                "mt-4 max-w-xl text-base leading-relaxed sm:mt-6 sm:text-lg",
                 dark ? "text-gray" : "text-slate",
               )}
             >
@@ -57,12 +58,13 @@ export function PageHero({
             </p>
           )}
           {(primaryCta || secondaryCta) && (
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap">
               {primaryCta && (
                 <Button
                   href={primaryCta.href}
                   size="lg"
                   variant={dark ? "inverse" : "primary"}
+                  className="w-full sm:w-auto"
                 >
                   {primaryCta.label}
                 </Button>
@@ -72,6 +74,7 @@ export function PageHero({
                   href={secondaryCta.href}
                   size="lg"
                   variant={dark ? "outline-light" : "ghost"}
+                  className="w-full sm:w-auto"
                 >
                   {secondaryCta.label}
                 </Button>

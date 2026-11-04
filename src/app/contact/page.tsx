@@ -56,7 +56,7 @@ export default function ContactPage() {
       <section className="section-pad section-cream">
         <div className="container-uq">
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-            <div className="border border-[var(--line)] bg-paper p-8 md:p-10">
+            <div className="border border-[var(--line)] bg-paper p-5 sm:p-8 md:p-10">
               <SectionHeading
                 eyebrow="Inquiry"
                 title="Project inquiry form"

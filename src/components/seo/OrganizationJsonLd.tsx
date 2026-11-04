@@ -7,7 +7,7 @@ export function OrganizationJsonLd() {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
-    logo: `${siteConfig.url}/brand/uqena-symbol.svg`,
+    logo: `${siteConfig.url}/brand/uqena-mark-512.png`,
     sameAs: [
       siteConfig.social.linkedin,
       siteConfig.social.twitter,

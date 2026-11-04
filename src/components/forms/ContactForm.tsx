@@ -28,7 +28,7 @@ const budgets = [
 ];
 
 const fieldClass =
-  "focus-ring w-full rounded-[var(--radius)] border border-[var(--line)] bg-white px-4 py-3 text-sm text-ink placeholder:text-slate/60";
+  "focus-ring field-uq w-full rounded-[var(--radius)] border border-[var(--line)] bg-white px-4 py-3.5 text-base text-ink placeholder:text-slate/60";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -221,7 +221,12 @@ function SelectField({
       <label htmlFor={name} className="mb-2 block text-sm font-medium text-ink">
         {label}
       </label>
-      <select id={name} name={name} className={fieldClass} defaultValue="">
+      <select
+        id={name}
+        name={name}
+        className={`${fieldClass} cursor-pointer`}
+        defaultValue=""
+      >
         <option value="" disabled>
           Select an option
         </option>

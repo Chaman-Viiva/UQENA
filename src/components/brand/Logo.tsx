@@ -1,8 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Official UQENA lockups — never typeset "UQENA" in the header.
+ *
+ * uqena-nav-light-v2.png → color mark + dark wordmark (cream / light bars)
+ * uqena-nav-dark-v2.png  → color mark + white wordmark (midnight / dark bars)
+ * uqena-stacked-dark.png → footer / brand blocks with tagline
+ * uqena-mark.png         → favicon / mark-only placements
+ */
+
 type LogoProps = {
+  /** Surface behind the logo */
   variant?: "dark" | "light" | "white" | "black";
   showWordmark?: boolean;
   showTagline?: boolean;
@@ -18,49 +29,70 @@ export function Logo({
   href = "/",
 }: LogoProps) {
   const onDark = variant === "dark" || variant === "white";
-  const wordmarkColor = onDark ? "#ffffff" : "#0c1222";
-  const symbolSrc =
-    variant === "white"
-      ? "/brand/uqena-symbol-white.svg"
-      : variant === "black"
-        ? "/brand/uqena-symbol-black.svg"
-        : "/brand/uqena-symbol.svg";
 
-  const content = (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <Image
-        src={symbolSrc}
-        alt=""
-        width={40}
-        height={40}
-        className="h-8 w-8 md:h-9 md:w-9"
-        priority
-      />
-      {showWordmark && (
-        <span className="flex flex-col items-start">
-          <span
-            className="font-display text-[1.05rem] md:text-[1.15rem] font-semibold tracking-[0.18em] leading-none"
-            style={{ color: wordmarkColor }}
-          >
-            UQENA
-          </span>
-          {showTagline && (
-            <span
-              className="mt-1.5 text-[0.58rem] font-medium tracking-[0.24em] uppercase"
-              style={{ color: wordmarkColor, opacity: 0.7 }}
-            >
-              Engineering What&apos;s Next.
-            </span>
-          )}
-        </span>
-      )}
-    </span>
-  );
+  let content: ReactNode;
+
+  if (showTagline && onDark) {
+    content = (
+      <span className={cn("inline-flex h-10 items-center md:h-12", className)}>
+        <Image
+          src="/brand/uqena-stacked-dark.png"
+          alt="UQENA — Engineering What's Next."
+          width={220}
+          height={151}
+          className="h-full w-auto object-contain object-left"
+          priority
+        />
+      </span>
+    );
+  } else if (showWordmark) {
+    const src = onDark
+      ? "/brand/uqena-nav-dark-v2.png"
+      : variant === "black"
+        ? "/brand/uqena-lockup-mono-dark.png"
+        : "/brand/uqena-nav-light-v2.png";
+
+    content = (
+      <span
+        className={cn(
+          "header-logo inline-flex h-7 max-w-[10.5rem] items-center sm:h-8 sm:max-w-[12rem]",
+          className,
+        )}
+      >
+        <Image
+          src={src}
+          alt="UQENA"
+          width={577}
+          height={128}
+          className="h-full w-auto max-h-full object-contain object-left"
+          priority
+          sizes="192px"
+        />
+      </span>
+    );
+  } else {
+    content = (
+      <span className={cn("inline-flex h-8 w-8 items-center", className)}>
+        <Image
+          src="/brand/uqena-mark.png"
+          alt="UQENA"
+          width={32}
+          height={32}
+          className="h-full w-full object-contain"
+          priority
+        />
+      </span>
+    );
+  }
 
   if (href === null) return content;
 
   return (
-    <Link href={href} className="focus-ring rounded-sm" aria-label="UQENA home">
+    <Link
+      href={href}
+      className="focus-ring inline-flex h-9 max-h-9 shrink-0 items-center rounded-sm"
+      aria-label="UQENA home"
+    >
       {content}
     </Link>
   );

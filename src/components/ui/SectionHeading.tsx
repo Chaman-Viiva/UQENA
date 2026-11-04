@@ -38,7 +38,7 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "font-display text-3xl font-medium tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.12]",
+          "font-display text-[1.75rem] font-medium leading-[1.15] tracking-tight sm:text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.12]",
           tone === "dark" ? "text-white" : "text-ink",
         )}
       >
@@ -47,7 +47,7 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-4 max-w-2xl text-base leading-relaxed md:text-lg",
+            "mt-3 max-w-2xl text-base leading-relaxed sm:mt-4 md:text-lg",
             tone === "dark" ? "text-gray" : "text-slate",
             align === "center" && "mx-auto",
           )}

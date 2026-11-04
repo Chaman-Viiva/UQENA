@@ -85,22 +85,34 @@ export default function AboutPage() {
       />
 
       <section className="section-pad section-cream">
-        <div className="container-uq grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div className="container-uq grid gap-12 lg:grid-cols-12 lg:gap-10 lg:items-center">
           <div className="lg:col-span-5">
-            <SectionHeading eyebrow="Introduction" title="Who we are" />
+            <div className="flex items-center justify-center rounded-[var(--radius-md)] bg-midnight px-8 py-12 md:px-12 md:py-14">
+              <Image
+                src="/brand/uqena-lockup-tagline-dark.png"
+                alt="UQENA — Engineering What's Next."
+                width={400}
+                height={220}
+                className="h-auto w-full max-w-[20rem]"
+                priority
+              />
+            </div>
           </div>
-          <div className="prose-uq lg:col-span-6 lg:col-start-7">
-            <p>
-              {siteConfig.name} is a software engineering and digital technology company. We help
-              teams design, build, and evolve web platforms, mobile experiences, internal systems,
-              and AI-assisted products — with an emphasis on maintainable architecture and interfaces
-              people can actually use.
-            </p>
-            <p>
-              This page describes how we think and work. It does not claim a specific founding
-              story, headcount, or tenure — those details will be shared when they are verified for
-              public communication.
-            </p>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <SectionHeading eyebrow="Introduction" title="Who we are" className="mb-6" />
+            <div className="prose-uq">
+              <p>
+                {siteConfig.name} is a software engineering and digital technology company. We help
+                teams design, build, and evolve web platforms, mobile experiences, internal systems,
+                and AI-assisted products — with an emphasis on maintainable architecture and interfaces
+                people can actually use.
+              </p>
+              <p>
+                This page describes how we think and work. It does not claim a specific founding
+                story, headcount, or tenure — those details will be shared when they are verified for
+                public communication.
+              </p>
+            </div>
           </div>
         </div>
       </section>
