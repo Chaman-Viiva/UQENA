@@ -179,7 +179,7 @@ export default function HomePage() {
               >
                 <Image
                   src={industry.image.replace(".svg", ".jpg")}
-                  alt=""
+                  alt={`${industry.title} industry`}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-105"
                   sizes="(max-width:768px) 100vw, 50vw"

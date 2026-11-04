@@ -4,12 +4,12 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Official UQENA lockups — never typeset "UQENA" in the header.
+ * Official UQENA lockups only — never typeset the wordmark in CSS.
  *
- * uqena-nav-light-v2.png → color mark + dark wordmark (cream / light bars)
- * uqena-nav-dark-v2.png  → color mark + white wordmark (midnight / dark bars)
- * uqena-stacked-dark.png → footer / brand blocks with tagline
- * uqena-mark.png         → favicon / mark-only placements
+ * uqena-nav-light-v2.png  → color mark + dark wordmark (cream / paper bars)
+ * uqena-nav-dark-v2.png   → color mark + white wordmark (midnight / dark bars)
+ * uqena-stacked-dark.png  → footer brand block with tagline
+ * uqena-mark.png          → favicon / mark-only
  */
 
 type LogoProps = {
@@ -55,7 +55,7 @@ export function Logo({
     content = (
       <span
         className={cn(
-          "header-logo inline-flex h-7 max-w-[10.5rem] items-center sm:h-8 sm:max-w-[12rem]",
+          "header-logo inline-flex h-7 max-w-[11rem] items-center sm:h-8 sm:max-w-[13rem]",
           className,
         )}
       >
@@ -66,7 +66,7 @@ export function Logo({
           height={128}
           className="h-full w-auto max-h-full object-contain object-left"
           priority
-          sizes="192px"
+          sizes="208px"
         />
       </span>
     );

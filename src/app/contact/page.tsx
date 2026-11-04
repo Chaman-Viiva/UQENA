@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { Globe, Mail, MessageCircle, Phone } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { SocialLinks } from "@/components/brand/SocialLinks";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { siteConfig } from "@/lib/config";
 
@@ -24,6 +25,10 @@ const contactFaqs = [
     question: "How quickly should I expect a reply?",
     answer:
       "We aim to respond to substantive inquiries within a few business days. Complex scoping questions may take longer while we assemble the right people for an initial conversation.",
+  },
+  {
+    question: "Can I reach you by phone or WhatsApp?",
+    answer: `Yes. Call or message ${siteConfig.contact.phone}, or use WhatsApp via the link on this page. Email remains the best channel for detailed project briefs.`,
   },
   {
     question: "Do you sign NDAs before early conversations?",
@@ -60,36 +65,95 @@ export default function ContactPage() {
               <SectionHeading
                 eyebrow="Inquiry"
                 title="Project inquiry form"
-                description="Share context so we can prepare for a useful first reply."
+                description="Share context so we can prepare for a useful first reply. Submitting opens your email client — nothing is stored on our servers from this form."
                 className="mb-8"
               />
               <ContactForm />
             </div>
 
-            <aside className="space-y-8">
+            <aside className="space-y-6">
               <div className="border border-[var(--line)] bg-white p-6 md:p-8">
                 <p className="eyebrow mb-4">Direct</p>
-                <h2 className="font-display text-2xl font-medium text-ink">Email us</h2>
+                <h2 className="font-display text-2xl font-medium text-ink">Reach UQENA</h2>
                 <p className="mt-3 text-sm leading-relaxed text-slate">
-                  Prefer to write directly? Use the address below — the same team reads every
-                  message.
+                  Prefer to write or call directly? Use the channels below — the same team reads
+                  every message.
                 </p>
-                <a
-                  href={siteConfig.contact.mailto}
-                  className="focus-ring mt-6 inline-flex items-center gap-3 text-base font-medium text-ink transition hover:text-blue"
-                >
-                  <Mail className="h-5 w-5 shrink-0 text-blue" aria-hidden />
-                  {siteConfig.contact.email}
-                </a>
+
+                <ul className="mt-6 space-y-4">
+                  <li>
+                    <a
+                      href={siteConfig.contact.mailto}
+                      className="focus-ring inline-flex items-start gap-3 text-base font-medium text-ink transition hover:text-blue"
+                    >
+                      <Mail className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
+                      <span>
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-slate">
+                          Email
+                        </span>
+                        {siteConfig.contact.email}
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={siteConfig.contact.phoneHref}
+                      className="focus-ring inline-flex items-start gap-3 text-base font-medium text-ink transition hover:text-blue"
+                    >
+                      <Phone className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
+                      <span>
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-slate">
+                          Phone
+                        </span>
+                        {siteConfig.contact.phone}
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={siteConfig.contact.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="focus-ring inline-flex items-start gap-3 text-base font-medium text-ink transition hover:text-blue"
+                    >
+                      <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
+                      <span>
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-slate">
+                          WhatsApp
+                        </span>
+                        Message on WhatsApp
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={siteConfig.url}
+                      className="focus-ring inline-flex items-start gap-3 text-base font-medium text-ink transition hover:text-blue"
+                    >
+                      <Globe className="mt-0.5 h-5 w-5 shrink-0 text-blue" aria-hidden />
+                      <span>
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-slate">
+                          Website
+                        </span>
+                        uqena.com
+                      </span>
+                    </a>
+                  </li>
+                </ul>
               </div>
 
-              <div
-                className="border border-[var(--line)] bg-paper p-6 md:p-8"
-                role="note"
-              >
+              <div className="border border-[var(--line)] bg-paper p-6 md:p-8">
+                <h2 className="font-display text-lg font-medium text-ink">Social</h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate">
+                  Follow UQENA on the platforms below.
+                </p>
+                <SocialLinks className="mt-4" tone="light" labeled />
+              </div>
+
+              <div className="border border-[var(--line)] bg-white p-6 md:p-8" role="note">
                 <h2 className="font-display text-lg font-medium text-ink">Privacy note</h2>
                 <p className="mt-3 text-sm leading-relaxed text-slate">
-                  Information you include in the mailto message is handled according to our{" "}
+                  Information you include in email or messages is handled according to our{" "}
                   <Link href="/privacy-policy" className="font-medium text-blue hover:underline">
                     Privacy Policy
                   </Link>

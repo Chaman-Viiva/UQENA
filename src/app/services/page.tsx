@@ -176,8 +176,8 @@ export default function ServicesPage() {
         <div className="container-uq grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div className="img-frame relative aspect-[4/3] rounded-[var(--radius-md)]">
             <Image
-              src="/images/services/custom.jpg"
-              alt=""
+              src="/images/services/transformation.jpg"
+              alt="Dedicated engineering team collaboration"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"

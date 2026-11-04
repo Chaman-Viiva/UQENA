@@ -52,7 +52,7 @@ export default async function IndustryDetailPage({ params }: PageProps) {
         primaryCta={{ label: "Discuss your product", href: "/contact" }}
         secondaryCta={{ label: "All industries", href: "/industries" }}
         image={imageSrc}
-        imageAlt=""
+        imageAlt={`${industry.title} — industry context`}
       />
 
       <section className="section-pad section-cream">

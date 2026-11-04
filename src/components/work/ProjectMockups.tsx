@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /** Conceptual product UI compositions — not screenshots of live client products. */
@@ -41,6 +42,12 @@ export function CareFlowMock({ className }: { className?: string }) {
 }
 
 export function HavenlyMock({ className }: { className?: string }) {
+  const listings = [
+    { t: "North Glass House", p: "Harbor District", pos: "object-[20%_40%]" },
+    { t: "Cedar Courtyard", p: "Hillside", pos: "object-[55%_35%]" },
+    { t: "Atlas Lofts", p: "Warehouse Row", pos: "object-[80%_50%]" },
+  ] as const;
+
   return (
     <div className={cn("overflow-hidden rounded-[var(--radius-md)] border border-[#e5ddd2] bg-[#f7f3ee] shadow-xl", className)}>
       <div className="flex items-center justify-between border-b border-[#e5ddd2] px-4 py-3">
@@ -48,13 +55,17 @@ export function HavenlyMock({ className }: { className?: string }) {
         <span className="text-[10px] uppercase tracking-wider text-[#7a7166]">Marketplace · Conceptual</span>
       </div>
       <div className="grid gap-3 p-4 md:grid-cols-3">
-        {[
-          { t: "North Glass House", p: "Harbor District" },
-          { t: "Cedar Courtyard", p: "Hillside" },
-          { t: "Atlas Lofts", p: "Warehouse Row" },
-        ].map((card) => (
+        {listings.map((card) => (
           <div key={card.t} className="overflow-hidden rounded-md border border-[#e5ddd2] bg-white">
-            <div className="h-20 bg-gradient-to-br from-[#c9b8a4] to-[#8f7d6a]" />
+            <div className="relative h-20 overflow-hidden bg-[#c9b8a4]">
+              <Image
+                src="/images/projects/havenly-bg.jpg"
+                alt=""
+                fill
+                className={cn("object-cover", card.pos)}
+                sizes="160px"
+              />
+            </div>
             <div className="p-3">
               <div className="text-xs font-semibold text-[#1c1814]">{card.t}</div>
               <div className="mt-1 text-[10px] text-[#7a7166]">{card.p}</div>

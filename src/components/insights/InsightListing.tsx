@@ -55,7 +55,7 @@ export function InsightListing() {
               <div className="img-frame relative aspect-[16/9]">
                 <Image
                   src={article.cover}
-                  alt=""
+                  alt={`Cover image for ${article.title}`}
                   fill
                   className="object-cover"
                   sizes="(max-width:768px) 100vw, 50vw"

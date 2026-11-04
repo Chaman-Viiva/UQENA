@@ -54,6 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@UQENAOfficial",
+    creator: "@UQENAOfficial",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
@@ -72,7 +74,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#080F24" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B1020" },
   ],
   width: "device-width",
   initialScale: 1,

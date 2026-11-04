@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: `How ${siteConfig.name} uses cookies and similar technologies on this website.`,
 };
 
-const lastUpdated = "November 3, 2026";
+const lastUpdated = "November 4, 2026";
 
 export default function CookiePolicyPage() {
   return (
@@ -18,83 +18,80 @@ export default function CookiePolicyPage() {
         tone="paper"
         eyebrow="Legal"
         title="Cookie Policy"
-        description="Draft explanation of cookies and similar technologies. Update the cookie inventory after analytics and marketing tools are finalized."
+        description={`How ${siteConfig.name} uses cookies and similar technologies on this website.`}
       />
 
       <section className="section-pad section-cream">
         <div className="container-uq max-w-3xl">
-          <div
-            className="mb-10 border border-amber-200 bg-amber-50/90 px-5 py-4 md:px-6 md:py-5"
-            role="note"
-          >
-            <p className="text-sm leading-relaxed text-slate">
-              <span className="font-semibold text-ink">Review required.</span> List actual cookies
-              and consent mechanisms implemented in production. If no non-essential cookies are used,
-              state that clearly after verification.
-            </p>
-          </div>
-
           <div className="prose-uq">
             <p className="text-sm text-slate">Last updated: {lastUpdated}</p>
 
             <h2>1. What are cookies?</h2>
             <p>
               Cookies are small text files stored on your device when you visit a website. Similar
-              technologies include local storage, session storage, and pixels. They help sites
-              function, remember preferences, or understand usage.
+              technologies include local storage, session storage, and pixels. They can help sites
+              function, remember preferences, or measure usage.
             </p>
 
             <h2>2. How {siteConfig.name} uses cookies</h2>
             <p>
-              We aim to minimize tracking on this marketing site. At the time of this draft, the
-              site is primarily informational.{" "}
-              <strong>
-                [Confirm whether essential hosting cookies, analytics (e.g., privacy-focused or
-                mainstream), embedded media, or consent banners are in use — document each.]
-              </strong>
+              This marketing website is primarily informational. A review of the application code
+              confirms that {siteConfig.name} does <strong>not</strong> implement first-party
+              analytics cookies, advertising cookies, or a marketing tag manager on this Site.
+            </p>
+            <p>
+              The Site also does not currently provide a cookie preference center because
+              non-essential cookies are not set by the application itself. If that changes, this
+              policy and any required consent mechanism will be updated before non-essential
+              cookies are introduced.
             </p>
 
-            <h3>2.1 Strictly necessary</h3>
+            <h3>2.1 Strictly necessary / operational</h3>
             <p>
-              These cookies are required for basic operation and security (for example, load
-              balancing or abuse protection at the hosting layer). They do not require consent in
-              many jurisdictions, but you should still document them.{" "}
-              <strong>[Inventory necessary cookies and providers.]</strong>
+              Our hosting and content delivery provider (Vercel) may set or rely on strictly
+              necessary cookies or similar technologies for security, load balancing, abuse
+              prevention, or to deliver the Site reliably. These technologies are controlled by
+              the hosting platform and are typically required for the Site to function as
+              intended.
             </p>
 
             <h3>2.2 Analytics and performance</h3>
             <p>
-              If enabled, analytics cookies help us understand aggregate traffic and improve
-              content.{" "}
-              <strong>
-                [If not used, replace this section with: &quot;We do not use analytics cookies on
-                this site.&quot; after verification.]
-              </strong>
+              We do not use analytics or performance cookies through this Site&apos;s application
+              code at this time.
             </p>
 
-            <h3>2.3 Marketing</h3>
+            <h3>2.3 Marketing and advertising</h3>
             <p>
-              <strong>
-                [If not used, state: &quot;We do not use marketing or advertising cookies on this
-                site.&quot;]
-              </strong>
+              We do not use marketing or advertising cookies through this Site&apos;s application
+              code at this time.
+            </p>
+
+            <h3>2.4 Local storage</h3>
+            <p>
+              Ordinary browser features used by the Site (for example, session state managed by
+              your browser while navigating) are not used to track you across sites for
+              advertising. We do not store marketing profiles in local storage via this Site.
             </p>
 
             <h2>3. Your choices</h2>
             <p>
-              You can control cookies through browser settings — including blocking or deleting
-              cookies. Blocking strictly necessary cookies may affect site functionality.
+              You can control cookies through your browser settings, including blocking or
+              deleting cookies. Blocking cookies required by hosting or security layers may affect
+              Site functionality.
             </p>
             <p>
-              Where required by law, we will provide a consent mechanism before non-essential
-              cookies are set.{" "}
-              <strong>[Describe consent tool and preference center if implemented.]</strong>
+              Because this Site does not set non-essential cookies in its own code, a separate
+              on-site consent banner is not currently required for analytics or marketing cookies
+              that we control. If we introduce such technologies later, we will update this policy
+              and implement an appropriate consent experience where legally required.
             </p>
 
             <h2>4. Third parties</h2>
             <p>
-              Third-party services linked from our site (such as social networks) may set their own
-              cookies when you visit them. Their policies apply on their domains.
+              Links to third-party services (for example LinkedIn, Facebook, Instagram, X, or
+              WhatsApp) may cause those services to set their own cookies when you visit their
+              domains. Their policies apply there — not on {siteConfig.url}.
             </p>
 
             <h2>5. Updates</h2>

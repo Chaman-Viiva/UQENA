@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { SocialLinks } from "@/components/brand/SocialLinks";
 import { siteConfig } from "@/lib/config";
 import { footerNavigation } from "@/data/navigation";
 
@@ -14,30 +15,25 @@ export function Footer() {
               Software engineering and digital product partnership for teams that need
               clarity, craft, and systems built to last.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {(
-                [
-                  { href: siteConfig.social.linkedin, label: "LinkedIn" },
-                  { href: siteConfig.social.twitter, label: "X" },
-                  { href: siteConfig.social.github, label: "GitHub" },
-                ] as const
-              ).map((social) => (
+            <SocialLinks className="mt-6" tone="dark" />
+            <div className="mt-6 space-y-2 text-sm text-gray">
+              <p>
                 <a
-                  key={social.href}
-                  href={social.href}
-                  className="focus-ring inline-flex min-h-10 items-center rounded-[var(--radius)] border border-white/15 px-3 py-1.5 text-xs font-semibold text-gray transition hover:border-white/40 hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  className="text-white underline-offset-4 hover:underline"
+                  href={siteConfig.contact.mailto}
                 >
-                  {social.label}
+                  {siteConfig.contact.email}
                 </a>
-              ))}
+              </p>
+              <p>
+                <a
+                  className="text-white/80 underline-offset-4 hover:text-white hover:underline"
+                  href={siteConfig.contact.phoneHref}
+                >
+                  {siteConfig.contact.phone}
+                </a>
+              </p>
             </div>
-            <p className="mt-6 break-all text-sm text-gray sm:break-normal">
-              <a className="text-white underline-offset-4 hover:underline" href={siteConfig.contact.mailto}>
-                {siteConfig.contact.email}
-              </a>
-            </p>
           </div>
 
           <FooterColumn title="Company" links={footerNavigation.company} />

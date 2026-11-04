@@ -10,10 +10,12 @@ export function OrganizationJsonLd() {
     logo: `${siteConfig.url}/brand/uqena-mark-512.png`,
     sameAs: [
       siteConfig.social.linkedin,
+      siteConfig.social.facebook,
+      siteConfig.social.instagram,
       siteConfig.social.twitter,
-      siteConfig.social.github,
     ],
     email: siteConfig.contact.email,
+    telephone: siteConfig.contact.phone,
     slogan: siteConfig.tagline,
   };
 

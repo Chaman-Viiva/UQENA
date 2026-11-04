@@ -64,7 +64,7 @@ export function ProjectFilter() {
                 <div className="img-frame relative h-full min-h-[200px] overflow-hidden rounded-[var(--radius-md)]">
                   <Image
                     src={project.image}
-                    alt=""
+                    alt={`${project.title} concept visual`}
                     fill
                     className="object-cover"
                     sizes="50vw"

@@ -73,7 +73,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <div className="img-frame relative h-full min-h-[220px] overflow-hidden rounded-[var(--radius-md)]">
               <Image
                 src={project.image}
-                alt=""
+                alt={`${project.title} concept visual`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 480px"

@@ -61,7 +61,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         primaryCta={{ label: "Discuss this service", href: "/contact" }}
         secondaryCta={{ label: "All services", href: "/services" }}
         image={heroImage}
-        imageAlt=""
+        imageAlt={`${service.title} — service illustration`}
       />
 
       <section className="section-pad section-cream">

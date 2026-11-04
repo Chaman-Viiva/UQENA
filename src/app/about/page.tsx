@@ -6,6 +6,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { SocialLinks } from "@/components/brand/SocialLinks";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { differentiators } from "@/data/process";
 import { siteConfig } from "@/lib/config";
@@ -248,7 +249,15 @@ export default function AboutPage() {
       </section>
 
       <section className="section-pad section-paper">
-        <div className="container-uq">
+        <div className="container-uq flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow mb-3">Connect</p>
+            <h2 className="font-display text-2xl font-medium text-ink">Follow UQENA</h2>
+            <p className="mt-2 max-w-md text-sm text-slate">
+              Updates and company presence on LinkedIn, Facebook, Instagram, and X.
+            </p>
+            <SocialLinks className="mt-5" tone="light" labeled />
+          </div>
           <Link href="/work" className="link-arrow inline-flex">
             View our work <ArrowUpRight className="h-4 w-4" />
           </Link>

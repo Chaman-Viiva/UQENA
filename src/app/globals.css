@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --midnight: #080f24;
+  --midnight: #0b1020;
   --navy: #0b1020;
   --navy-soft: #141b2f;
   --ink: #0c1222;
   --paper: #f3efe8;
   --paper-deep: #e8e2d8;
   --cream: #faf8f4;
-  --blue: #2b7bff;
+  --blue: #3882f6;
   --cyan: #20c9f4;
-  --violet: #7a3af0;
+  --violet: #8b3cf6;
   --gray: #aab7d0;
   --slate: #5b657a;
   --slate-deep: #3d4658;
@@ -135,6 +135,26 @@ img {
 
 .site-header {
   padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Nav chrome — data-theme wins over inherited body ink color */
+.site-header[data-theme="dark"] .nav-link {
+  color: #ffffff !important;
+}
+.site-header[data-theme="dark"] .nav-link-muted {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+.site-header[data-theme="light"] .nav-link {
+  color: #0c1222 !important;
+}
+.site-header[data-theme="light"] .nav-link-muted {
+  color: #5b657a !important;
+}
+.site-header[data-theme="dark"] .menu-toggle {
+  color: #0c1222;
+}
+.site-header[data-theme="light"] .menu-toggle {
+  color: #ffffff;
 }
 
 .site-header .header-logo img {

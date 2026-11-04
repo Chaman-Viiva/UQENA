@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { mainNavigation } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 
-/** Pages whose #site-hero is paper/cream — avoid white-on-cream flash before measure */
+/** Routes whose first hero is paper/cream — start with light nav to avoid a white-on-cream flash */
 const LIGHT_HERO_PREFIXES = [
   "/about",
   "/solutions",
@@ -25,19 +25,18 @@ function pathAssumesDarkHero(pathname: string) {
   );
 }
 
-function heroIsDark(hero: HTMLElement) {
-  return (
-    hero.getAttribute("data-nav") === "dark" ||
-    hero.classList.contains("bg-midnight") ||
-    hero.classList.contains("section-dark")
-  );
-}
-
 function measureOverDark() {
   const hero = document.getElementById("site-hero");
   if (!hero) return false;
   const overHero = hero.getBoundingClientRect().bottom > 72;
-  return overHero && heroIsDark(hero);
+  if (!overHero) return false;
+  const nav = hero.getAttribute("data-nav");
+  if (nav === "dark") return true;
+  if (nav === "light") return false;
+  return (
+    hero.classList.contains("bg-midnight") ||
+    hero.classList.contains("section-dark")
+  );
 }
 
 export function Header() {
@@ -50,7 +49,6 @@ export function Header() {
   const [overDark, setOverDark] = useState(assumeDark);
   const [ready, setReady] = useState(false);
 
-  // Sync measure before paint so cream pages never flash white nav
   useLayoutEffect(() => {
     const update = () => {
       setScrolled(window.scrollY > 12);
@@ -73,16 +71,14 @@ export function Header() {
     };
   }, [open]);
 
-  // Before measure: trust the route. After: trust the hero.
+  // Mobile drawer is always on cream → force light chrome while open
   const darkNav = (ready ? overDark : assumeDark) && !open;
   const solid = ready ? scrolled || open || !overDark : !assumeDark;
-
-  // Explicit hex — never inherit body text-ink onto dark heroes
-  const navColor = darkNav ? "#ffffff" : "#0c1222";
-  const navMuted = darkNav ? "rgba(255,255,255,0.78)" : "#3d4658";
+  const theme = darkNav ? "dark" : "light";
 
   return (
     <header
+      data-theme={theme}
       className={cn(
         "site-header fixed inset-x-0 top-0 z-50 transition-colors duration-300",
         solid
@@ -101,14 +97,10 @@ export function Header() {
               <div key={item.label} className="relative group">
                 <Link
                   href={item.href ?? "#"}
-                  className="focus-ring inline-flex items-center gap-1.5 rounded-sm px-3 py-2 text-sm font-semibold transition hover:opacity-80"
-                  style={{ color: navColor }}
+                  className="nav-link focus-ring inline-flex items-center gap-1.5 rounded-sm px-3 py-2 text-sm font-semibold transition hover:opacity-80"
                 >
                   {item.label}
-                  <ChevronDown
-                    className="h-3.5 w-3.5 shrink-0 transition group-hover:rotate-180"
-                    style={{ color: navMuted }}
-                  />
+                  <ChevronDown className="nav-link-muted h-3.5 w-3.5 shrink-0 transition group-hover:rotate-180" />
                 </Link>
                 <div className="invisible absolute left-0 top-full z-50 w-[36rem] max-w-[min(36rem,calc(100vw-2rem))] pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="rounded-[var(--radius-md)] border border-[var(--line)] bg-cream p-3 shadow-xl">
@@ -129,7 +121,7 @@ export function Header() {
                     <div className="mt-2 border-t border-[var(--line)] pt-2">
                       <Link
                         href="/services"
-                        className="focus-ring block rounded-[var(--radius)] px-3 py-2 text-sm font-semibold text-[#2b7bff] hover:bg-paper"
+                        className="focus-ring block rounded-[var(--radius)] px-3 py-2 text-sm font-semibold text-[#3882F6] hover:bg-paper"
                       >
                         View all services →
                       </Link>
@@ -141,8 +133,7 @@ export function Header() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className="focus-ring rounded-sm px-3 py-2 text-sm font-semibold transition hover:opacity-80"
-                style={{ color: navColor }}
+                className="nav-link focus-ring rounded-sm px-3 py-2 text-sm font-semibold transition hover:opacity-80"
               >
                 {item.label}
               </Link>
@@ -159,10 +150,9 @@ export function Header() {
         <button
           type="button"
           className={cn(
-            "focus-ring inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius)] border xl:hidden",
-            darkNav ? "border-white bg-white text-ink" : "border-ink bg-ink text-white",
+            "menu-toggle focus-ring inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius)] border xl:hidden",
+            darkNav ? "border-white bg-white" : "border-[var(--line)] bg-ink",
           )}
-          style={{ color: darkNav ? "#0c1222" : "#ffffff" }}
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}

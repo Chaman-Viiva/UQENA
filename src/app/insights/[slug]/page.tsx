@@ -62,7 +62,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
         primaryCta={{ label: "All insights", href: "/insights" }}
         secondaryCta={{ label: "Contact", href: "/contact" }}
         image={article.cover}
-        imageAlt=""
+        imageAlt={`Cover image for ${article.title}`}
       />
 
       <section className="section-pad section-cream border-b border-[var(--line)]">

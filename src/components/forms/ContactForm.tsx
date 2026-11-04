@@ -9,13 +9,13 @@ type Status = "idle" | "error" | "success";
 const services = [
   "Custom Software Development",
   "Web Application Development",
-  "Mobile App Development",
-  "AI & Machine Learning",
+  "Mobile Application Development",
+  "Backend Engineering and API Development",
+  "AI and Automation Solutions",
   "UI/UX Design",
-  "Cloud & DevOps",
-  "Backend & API Development",
-  "Automation",
+  "Cloud and DevOps",
   "Digital Transformation",
+  "Dedicated Development Teams",
   "Not sure yet",
 ];
 
@@ -77,7 +77,14 @@ export function ContactForm() {
       `Name: ${payload.name}\nEmail: ${payload.email}\nCompany: ${payload.company}\nService: ${payload.service}\nBudget: ${payload.budget}\nPreferred contact: ${payload.method}\n\nProject description:\n${payload.description}`,
     );
 
-    window.location.href = `${siteConfig.contact.mailto}?subject=${subject}&body=${body}`;
+    // Mailto opens the visitor's email client — not a server-side submission.
+    const mailtoUrl = `${siteConfig.contact.mailto}?subject=${subject}&body=${body}`;
+    const anchor = document.createElement("a");
+    anchor.href = mailtoUrl;
+    anchor.rel = "noopener";
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
     setStatus("success");
     formEl.reset();
   }

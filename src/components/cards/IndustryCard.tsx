@@ -29,7 +29,7 @@ export function IndustryCard({ href, title, summary, image, className, lead }: P
       >
         <Image
           src={src}
-          alt=""
+          alt={`${title} industry`}
           fill
           className="object-cover transition duration-700 group-hover:scale-105"
           sizes="(max-width:768px) 100vw, 33vw"
